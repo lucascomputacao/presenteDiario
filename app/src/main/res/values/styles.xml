@@ -17,10 +17,10 @@
 
     <!-- Action bar theme -->
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
-        <item name="android:background">@color/azul_escuro</item>
+        <item name="android:background">@color/azul_escuro_actionbar</item>
 
         <!-- Support library compatibility -->
-        <item name="background">@color/azul_escuro</item>
+        <item name="background">@color/azul_escuro_actionbar</item>
     </style>
 
 
