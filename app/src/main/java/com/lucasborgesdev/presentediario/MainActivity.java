@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         int versao = year - norma;
 
         // making URLs
-        final String url_text = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
-        final String url_audio = "http://transmundial.org.br/podcast/presente_diario/" + versao
+        final String url_text_redirect = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
+        final String url_audio_redirect = "http://transmundial.org.br/podcast/presente_diario/" + versao
                 + "/" + "presente" + dateFormatNoTraces + ".mp3";
 
         // Redirection button to text page
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent browserInternet = new Intent(Intent.ACTION_VIEW,
                         // Uri.parse("http://www.transmundial.org.br/presente-diario/03-08-2015"));
-                        Uri.parse(url_text));
+                        Uri.parse(url_text_redirect));
                 startActivity(browserInternet);
             }
         });
@@ -68,26 +68,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent audioBrowserInternet = new Intent(Intent.ACTION_VIEW,
                         //Uri.parse("http://transmundial.org.br/podcast/presente_diario/18/presente03082015.mp3"));
-                        Uri.parse(url_audio));
+                        Uri.parse(url_audio_redirect));
                 startActivity(audioBrowserInternet);
             }
         });
 
 
-        // download do áudio
-        final String url_download_audio = "http://transmundial.org.br/podcast/presente_diario/" + versao
-                + "/" + "presente" + dateFormatNoTraces + ".mp3";
-
-        // criando botão
+        // Download do áudio
+        final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
+                + MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect);
         Button buttonDownload = (Button) findViewById(R.id.download_audio);
+
         // Setando listener para o botão
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameOfFile = URLUtil.guessFileName(url_download_audio, null,
-                        MimeTypeMap.getFileExtensionFromUrl(url_download_audio));
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
-                request.setTitle("PresenteDiario");
+                String nameOfFile = URLUtil.guessFileName(url_audio_redirect, null,
+                        MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect));
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_audio_redirect));
+                request.setTitle(title_download_audio);
                 request.setDescription("Arquivo sendo baixado...");
                 // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
                 //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             final String url_site = "http://www.transmundial.org.br/";
-            String dialog_title = "Presente Diário - versão 0.1 "
+            String dialog_title = "Presente Diário - Versão 0.1 "
                     + "\n"
                     + "web site: lucasborgesdev.com";
             String dialog_message = "Este aplicativo redireciona/baixa o contéudo do Presente Diário."
