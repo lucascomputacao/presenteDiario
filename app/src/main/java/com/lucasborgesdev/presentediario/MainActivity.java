@@ -1,12 +1,17 @@
 package com.lucasborgesdev.presentediario;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
+import android.webkit.URLUtil;
 import android.widget.Button;
 
 import java.text.SimpleDateFormat;
@@ -62,6 +67,33 @@ public class MainActivity extends AppCompatActivity {
                         //Uri.parse("http://transmundial.org.br/podcast/presente_diario/18/presente03082015.mp3"));
                         Uri.parse(url_audio));
                 startActivity(audioBrowserInternet);
+            }
+        });
+
+
+        // download do áudio
+        final String url_download_audio = "http://transmundial.org.br/podcast/presente_diario/" + versao
+                +  "/" + "presente" + dateFormatNoTraces + ".mp3";
+
+        // criando botão
+        Button buttonDownload = (Button) findViewById(R.id.download_audio);
+        // Setando listener para o botão
+        buttonDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nameOfFile = URLUtil.guessFileName(url_download_audio, null,
+                        MimeTypeMap.getFileExtensionFromUrl(url_download_audio));
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
+                request.setTitle("PresenteDiario");
+                request.setDescription("Arquivo sendo baixado...");
+                // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
+                //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+                request.allowScanningByMediaScanner();
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nameOfFile);
+
+                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                manager.enqueue(request);
             }
         });
     }

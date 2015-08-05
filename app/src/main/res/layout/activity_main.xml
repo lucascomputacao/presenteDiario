@@ -12,7 +12,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/titulo" />
+            android:text="@string/titulo"
+            android:textSize="@dimen/abc_action_bar_content_inset_material"/>
 
         <Button
             android:id="@+id/texto"
@@ -28,6 +29,14 @@
             android:layout_below="@id/texto"
             android:layout_gravity="center_horizontal"
             android:text="Ouvir Áudio na internet" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/download_audio"
+            android:text="Baixar Áudio"
+            android:layout_below="@+id/audio"
+            android:layout_gravity="center"/>
 
 
 </LinearLayout>
