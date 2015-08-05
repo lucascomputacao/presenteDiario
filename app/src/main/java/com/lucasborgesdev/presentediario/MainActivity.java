@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // preparing date for URLs for download
+        // preparing date for URLs for redirect
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
         Calendar cal = Calendar.getInstance();
