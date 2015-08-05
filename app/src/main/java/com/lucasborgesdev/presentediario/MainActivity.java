@@ -1,12 +1,15 @@
 package com.lucasborgesdev.presentediario;
 
+import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.DialogPreference;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browerInternet = new Intent(Intent.ACTION_VIEW,
+                Intent browserInternet = new Intent(Intent.ACTION_VIEW,
                         // Uri.parse("http://www.transmundial.org.br/presente-diario/03-08-2015"));
                         Uri.parse(url_text));
-                startActivity(browerInternet);
+                startActivity(browserInternet);
             }
         });
 
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         // download do áudio
         final String url_download_audio = "http://transmundial.org.br/podcast/presente_diario/" + versao
-                +  "/" + "presente" + dateFormatNoTraces + ".mp3";
+                + "/" + "presente" + dateFormatNoTraces + ".mp3";
 
         // criando botão
         Button buttonDownload = (Button) findViewById(R.id.download_audio);
@@ -113,10 +116,48 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        // if (id == R.id.action_settings) {
+        //   return true;
+        //}
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_about) {
+            final String url_site = "http://www.transmundial.org.br/";
+            String dialog_title = "Presente Diário - versão 0.1 "
+                    + "\n"
+                    + "web site: lucasborgesdev.com";
+            String dialog_message = "Este aplicativo redireciona/baixa o contéudo do Presente Diário."
+                    + "\n" + "Disponível em :" + "\n"
+                    + "http://www.transmundial.org.br/";
+
+            // criar dialog do menu sobre este app
+            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+            // Setando Título do dialog
+            alertDialog.setTitle(dialog_title);
+            // Mensagem do dialog
+            alertDialog.setMessage(dialog_message);
+            //
+            alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // ação ao clicar no botão OK
+                }
+            });
+            alertDialog.setPositiveButton("Ir ao site", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // ação ir ao site
+                    Intent browserInternet = new Intent(Intent.ACTION_VIEW, Uri.parse(url_site));
+                    startActivity(browserInternet);
+                }
+            });
+            alertDialog.show();
+
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return super.
+
+                onOptionsItemSelected(item);
     }
 }
