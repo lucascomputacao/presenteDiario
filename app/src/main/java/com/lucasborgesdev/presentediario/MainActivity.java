@@ -99,6 +99,20 @@ public class MainActivity extends AppCompatActivity {
                 manager.enqueue(request);
             }
         });
+
+        // WebActivity
+        // lucas
+        final Context context = this;
+
+        Button button_webactivity = (Button) findViewById(R.id.buttonUrl);
+
+        button_webactivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
