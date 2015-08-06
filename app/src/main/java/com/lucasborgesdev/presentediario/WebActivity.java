@@ -1,6 +1,7 @@
 package com.lucasborgesdev.presentediario;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.webkit.WebView;
 
@@ -8,9 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by lucas on 06/08/15.
- */
+
 public class WebActivity extends Activity {
 
     private WebView webView;
@@ -32,10 +31,15 @@ public class WebActivity extends Activity {
 
         webView.getSettings().setJavaScriptEnabled(true);
 
-        //webView.loadUrl("http://www.javacodegeeks.com");
-        //webView.loadUrl("http://www.transmundial.org.br/presente-diario/06-08-2015");
         webView.loadUrl(url_text);
 
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        // ignore orientation change
+        if (newConfig.orientation != Configuration.ORIENTATION_LANDSCAPE) {
+            super.onConfigurationChanged(newConfig);
+        }
     }
 
 }
