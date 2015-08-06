@@ -1,6 +1,7 @@
 package com.lucasborgesdev.presentediario;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,14 +9,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import java.text.SimpleDateFormat;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
         Calendar cal = Calendar.getInstance();
         Date now = cal.getTime(); // set the current datetime in a Date-object
-        String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
+        final String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
         String dateFormatNoTraces = sdfNoTrace.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
 
 
@@ -84,11 +84,13 @@ public class MainActivity extends AppCompatActivity {
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Download do arquivo de Áudio
                 String nameOfFile = URLUtil.guessFileName(url_audio_redirect, null,
                         MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect));
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_audio_redirect));
                 request.setTitle(title_download_audio);
-                request.setDescription("Arquivo sendo baixado...");
+                String description = "Áudio Presente Diário " + dateFormatTraces;
+                request.setDescription(description);
                 // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
                 //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
                 request.allowScanningByMediaScanner();
@@ -97,11 +99,35 @@ public class MainActivity extends AppCompatActivity {
 
                 DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 manager.enqueue(request);
+
+                // Dialog Abrir diretório
+                final AlertDialog.Builder dialog_download = new AlertDialog.Builder(MainActivity.this);
+                dialog_download.setTitle("Download");
+                dialog_download.setMessage("Arquivo de áudio sendo baixado"
+                        + "\n"
+                        + "Mostrar na pasta?");
+                dialog_download.setCancelable(true);
+                dialog_download.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Ação positiva
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        Uri uri = Uri.parse(Environment.DIRECTORY_DOWNLOADS);
+                        intent.setDataAndType(uri, "text/csv");
+                        startActivity(Intent.createChooser(intent, "Open folder"));
+                    }
+                });
+                dialog_download.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Ação negativa
+                    }
+                });
+                dialog_download.show();
             }
         });
 
         // WebActivity
-        // lucas
         final Context context = this;
 
         Button button_webactivity = (Button) findViewById(R.id.buttonUrl);
@@ -129,10 +155,6 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        // if (id == R.id.action_settings) {
-        //   return true;
-        //}
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             final String url_site = "http://www.transmundial.org.br/";
