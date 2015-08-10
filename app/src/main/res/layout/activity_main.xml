@@ -29,10 +29,17 @@
         android:text="Mostrar texto" />
 
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonUrl"
+        android:text="Baixar texto"
+        android:id="@+id/download_texto"/>
+
+    <Button
         android:id="@+id/audio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/texto"
+        android:layout_below="@id/download_texto"
         android:layout_gravity="center_horizontal"
         android:text="Ouvir Áudio na internet" />
 

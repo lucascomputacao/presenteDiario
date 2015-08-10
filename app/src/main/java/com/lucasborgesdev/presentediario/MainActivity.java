@@ -139,6 +139,58 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Download de arquivo de texto
+        final String url_download_texto = "http://104.236.27.118/presente_diario/presente"
+                + dateFormatTraces + ".txt";
+        final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
+                + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
+        Button button_downloadTexto = (Button) findViewById(R.id.download_texto);
+        button_downloadTexto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Download do arquivo de Texto
+                String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
+                        MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_texto));
+                request.setTitle(title_download_texto);
+                String description = "Texto Presente Diário " + dateFormatTraces;
+                request.setDescription(description);
+                // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
+                //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+                request.allowScanningByMediaScanner();
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nameOfFile);
+
+                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                manager.enqueue(request);
+
+                // Dialog Abrir diretório
+                final AlertDialog.Builder dialog_download = new AlertDialog.Builder(MainActivity.this);
+                dialog_download.setTitle("Download");
+                dialog_download.setMessage("Arquivo de texto sendo baixado"
+                        + "\n"
+                        + "Mostrar na pasta?");
+                dialog_download.setCancelable(true);
+                dialog_download.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Ação positiva
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        Uri uri = Uri.parse(Environment.DIRECTORY_DOWNLOADS);
+                        intent.setDataAndType(uri, "text/csv");
+                        startActivity(Intent.createChooser(intent, "Open folder"));
+                    }
+                });
+                dialog_download.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Ação negativa
+                    }
+                });
+                dialog_download.show();
+            }
+        });
     }
 
     @Override

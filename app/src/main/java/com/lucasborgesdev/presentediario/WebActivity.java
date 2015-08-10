@@ -25,7 +25,8 @@ public class WebActivity extends Activity {
         Date now = cal.getTime(); // set the current datetime in a Date-object
         String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
 
-        final String url_text = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
+//        final String url_text = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
+        final String url_text = "http://104.236.27.118/presente_diario/presente" + dateFormatTraces + ".html";
 
         webView = (WebView) findViewById(R.id.webView);
 
