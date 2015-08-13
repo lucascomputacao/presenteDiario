@@ -240,8 +240,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        // Share
-        if (id == R.id.menu_item_share) {
+        // Share text
+        if (id == R.id.menu_item_share_text) {
 
 
             // Intent funcionando
