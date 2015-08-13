@@ -17,36 +17,51 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
 import android.widget.Button;
+import android.widget.ShareActionProvider;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ShareActionProvider mShareActionProvider;
+
+    // preparing date for URLs for redirect
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
+    Calendar cal = Calendar.getInstance();
+    Date now = cal.getTime(); // set the current datetime in a Date-object
+    final String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
+    String dateFormatNoTraces = sdfNoTrace.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
+    // Calculando a versão
+    int year = cal.get(Calendar.YEAR); // get the current year
+    int norma = 1997;
+    int versao = year - norma;
+
+    // making URLs
+    final String url_text_redirect = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
+    final String url_audio_redirect = "http://transmundial.org.br/podcast/presente_diario/" + versao
+            + "/" + "presente" + dateFormatNoTraces + ".mp3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // preparing date for URLs for redirect
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
-        Calendar cal = Calendar.getInstance();
-        Date now = cal.getTime(); // set the current datetime in a Date-object
-        final String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
-        String dateFormatNoTraces = sdfNoTrace.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
-
-
-        int year = cal.get(Calendar.YEAR); // get the current year
-        // acertando a versao
-        int norma = 1997;
-        int versao = year - norma;
-
-        // making URLs
-        final String url_text_redirect = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
-        final String url_audio_redirect = "http://transmundial.org.br/podcast/presente_diario/" + versao
-                + "/" + "presente" + dateFormatNoTraces + ".mp3";
 
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
@@ -73,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(audioBrowserInternet);
             }
         });
-
 
         // Download do áudio
         final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
@@ -129,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
 
         // WebActivity
         final Context context = this;
-
         Button button_webactivity = (Button) findViewById(R.id.buttonUrl);
 
         button_webactivity.setOnClickListener(new View.OnClickListener() {
@@ -197,7 +210,21 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+//        // Locate MenuItem with ShareActionProvider
+//        MenuItem item = menu.findItem(R.id.menu_item_share);
+//
+//        // Fetch and store ShareActionProvider
+//        mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+
         return true;
+    }
+
+    // Call to update the share intent
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
     }
 
     @Override
@@ -240,6 +267,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             alertDialog.show();
+
+            return true;
+        }
+
+        // Share
+        if (id == R.id.menu_item_share) {
+
+
+            // Intent funcionando
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+
+            share.putExtra(Intent.EXTRA_SUBJECT,
+                    "Teste de compartilhamento Presente Diario");
+            share.putExtra(Intent.EXTRA_TEXT, "Texto teste de compartilhamento do Presente Diário");
+
+            startActivity(Intent.createChooser(share, "Compartilhar"));
 
             return true;
         }
