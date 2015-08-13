@@ -39,7 +39,6 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ShareActionProvider mShareActionProvider;
 
     // preparing date for URLs for redirect
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -211,20 +210,8 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-//        // Locate MenuItem with ShareActionProvider
-//        MenuItem item = menu.findItem(R.id.menu_item_share);
-//
-//        // Fetch and store ShareActionProvider
-//        mShareActionProvider = (ShareActionProvider) item.getActionProvider();
 
         return true;
-    }
-
-    // Call to update the share intent
-    private void setShareIntent(Intent shareIntent) {
-        if (mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
-        }
     }
 
     @Override
