@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom"
         android:title="Compartilhar texto"/>
     <item
-        android:id="@+id/menu_item_share"
+        android:id="@+id/menu_item_share_audio"
         android:icon="@mipmap/ic_share_presente_diario"
         android:actionProviderClass="android.widget.ShareActionProvider"
         app:showAsAction="ifRoom"

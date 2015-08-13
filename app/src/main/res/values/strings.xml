@@ -3,4 +3,6 @@
 
     <string name="titulo">Presente Diário - O seu momento devocional!</string>
     <string name="action_about">Sobre este Aplicativo</string>
+    <string name="send_text_to">Enviar texto para:</string>
+    <string name="send_audio_to">Enviar áudio para:</string>
 </resources>

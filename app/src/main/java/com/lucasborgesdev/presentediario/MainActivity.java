@@ -1,5 +1,6 @@
 package com.lucasborgesdev.presentediario;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -8,19 +9,28 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
+import android.widget.AdapterView;
 import android.widget.Button;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-
 
     // preparing date for URLs for redirect
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -43,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
@@ -90,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
                 request.allowScanningByMediaScanner();
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nameOfFile);
-
+//                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nameOfFile);
+                request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
                 DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 manager.enqueue(request);
 
@@ -154,7 +165,8 @@ public class MainActivity extends AppCompatActivity {
                 //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
                 request.allowScanningByMediaScanner();
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nameOfFile);
+//                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nameOfFile);
+                request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
 
                 DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 manager.enqueue(request);
@@ -242,7 +254,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Share text
         if (id == R.id.menu_item_share_text) {
-
+//
+//            Intent shareIntent = new Intent();
+//            shareIntent.setAction(Intent.ACTION_SEND);
+//            shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
+//            shareIntent.setType("image/jpeg");
+//            startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
 
             // Intent funcionando
             Intent share = new Intent(Intent.ACTION_SEND);
@@ -254,6 +271,20 @@ public class MainActivity extends AppCompatActivity {
             share.putExtra(Intent.EXTRA_TEXT, "Texto teste de compartilhamento do Presente Diário");
 
             startActivity(Intent.createChooser(share, "Compartilhar"));
+            startActivity(Intent.createChooser(share, getResources().getText(R.string.send_text_to)));
+
+            return true;
+        }
+        // Share audio
+        if (id == R.id.menu_item_share_audio) {
+            String sharePath = Environment.DIRECTORY_DOWNLOADS +
+                    "presente"+dateFormatNoTraces + ".mp3";
+            Uri uri = Uri.parse(sharePath);
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("audio/mp3");
+            share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+            share.putExtra(Intent.EXTRA_STREAM, uri);
+            startActivity(Intent.createChooser(share, "Share Sound File"));
 
             return true;
         }
