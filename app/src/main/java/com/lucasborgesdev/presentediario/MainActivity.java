@@ -19,9 +19,12 @@ import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,6 +57,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // mostrar texto textview
+        final Context context_text = this;
+        Button button_textViewActivity = (Button) findViewById(R.id.btnReadSDFile);
+
+        button_textViewActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context_text, TextViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+//        final EditText txtData = (EditText) findViewById(R.id.txtData);
+//        Button btnReadSDFile = (Button) findViewById(R.id.btnReadSDFile);
+//        btnReadSDFile.setOnClickListener(new View.OnClickListener() {
+//
+//            public void onClick(View v) {
+//                // write on SD card file data in the text box
+//                try {
+//                    File myFile = new File("/sdcard/PresenteDiario/presente"+ dateFormatTraces +".txt");
+//                    FileInputStream fIn = new FileInputStream(myFile);
+//                    BufferedReader myReader = new BufferedReader(
+//                            new InputStreamReader(fIn));
+//                    String aDataRow = "";
+//                    String aBuffer = "";
+//                    while ((aDataRow = myReader.readLine()) != null) {
+//                        aBuffer += aDataRow + "\n";
+//                    }
+//                    txtData.setText(aBuffer);
+//                    myReader.close();
+//                    Toast.makeText(getBaseContext(),
+//                            "Done reading SD 'mysdfile.txt'",
+//                            Toast.LENGTH_SHORT).show();
+//                } catch (Exception e) {
+//                    Toast.makeText(getBaseContext(), e.getMessage(),
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//            }// onClick
+//        }); // btnReadSDFile
 
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
@@ -133,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // WebActivity
+        // WebActivity show text
         final Context context = this;
         Button button_webactivity = (Button) findViewById(R.id.buttonUrl);
 
@@ -275,19 +317,7 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         }
-        // Share audio
-        if (id == R.id.menu_item_share_audio) {
-            String sharePath = Environment.DIRECTORY_DOWNLOADS +
-                    "presente"+dateFormatNoTraces + ".mp3";
-            Uri uri = Uri.parse(sharePath);
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("audio/mp3");
-            share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-            share.putExtra(Intent.EXTRA_STREAM, uri);
-            startActivity(Intent.createChooser(share, "Share Sound File"));
 
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
