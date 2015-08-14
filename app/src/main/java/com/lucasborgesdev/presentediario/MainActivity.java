@@ -1,7 +1,7 @@
 package com.lucasborgesdev.presentediario;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,29 +9,33 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.content.FileProvider;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ShareActionProvider;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,46 +60,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // mostrar texto textview
-        final Context context_text = this;
-        Button button_textViewActivity = (Button) findViewById(R.id.btnReadSDFile);
-
-        button_textViewActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context_text, TextViewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-//        final EditText txtData = (EditText) findViewById(R.id.txtData);
-//        Button btnReadSDFile = (Button) findViewById(R.id.btnReadSDFile);
-//        btnReadSDFile.setOnClickListener(new View.OnClickListener() {
-//
-//            public void onClick(View v) {
-//                // write on SD card file data in the text box
-//                try {
-//                    File myFile = new File("/sdcard/PresenteDiario/presente"+ dateFormatTraces +".txt");
-//                    FileInputStream fIn = new FileInputStream(myFile);
-//                    BufferedReader myReader = new BufferedReader(
-//                            new InputStreamReader(fIn));
-//                    String aDataRow = "";
-//                    String aBuffer = "";
-//                    while ((aDataRow = myReader.readLine()) != null) {
-//                        aBuffer += aDataRow + "\n";
-//                    }
-//                    txtData.setText(aBuffer);
-//                    myReader.close();
-//                    Toast.makeText(getBaseContext(),
-//                            "Done reading SD 'mysdfile.txt'",
-//                            Toast.LENGTH_SHORT).show();
-//                } catch (Exception e) {
-//                    Toast.makeText(getBaseContext(), e.getMessage(),
-//                            Toast.LENGTH_SHORT).show();
-//                }
-//            }// onClick
-//        }); // btnReadSDFile
 
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
@@ -175,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // WebActivity show text
+        // WebActivity
         final Context context = this;
         Button button_webactivity = (Button) findViewById(R.id.buttonUrl);
 
@@ -207,8 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
                 request.allowScanningByMediaScanner();
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-//                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nameOfFile);
-                request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
+                request.setDestinationInExternalPublicDir("PresenteDiario", nameOfFile);
 
                 DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 manager.enqueue(request);
@@ -225,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Ação positiva
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        Uri uri = Uri.parse(Environment.DIRECTORY_DOWNLOADS);
+                        Uri uri = Uri.parse(Environment.getExternalStorageState());
                         intent.setDataAndType(uri, "text/csv");
                         startActivity(Intent.createChooser(intent, "Open folder"));
                     }
@@ -249,6 +212,8 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -294,14 +259,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        // Share text
-        if (id == R.id.menu_item_share_text) {
-//
-//            Intent shareIntent = new Intent();
-//            shareIntent.setAction(Intent.ACTION_SEND);
-//            shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
-//            shareIntent.setType("image/jpeg");
-//            startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
+        // Share
+        if (id == R.id.menu_item_share) {
+
 
             // Intent funcionando
             Intent share = new Intent(Intent.ACTION_SEND);
@@ -313,11 +273,9 @@ public class MainActivity extends AppCompatActivity {
             share.putExtra(Intent.EXTRA_TEXT, "Texto teste de compartilhamento do Presente Diário");
 
             startActivity(Intent.createChooser(share, "Compartilhar"));
-            startActivity(Intent.createChooser(share, getResources().getText(R.string.send_text_to)));
 
             return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }
