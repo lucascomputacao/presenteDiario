@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     int versao = year - norma;
     final String url_audio_redirect = "http://transmundial.org.br/podcast/presente_diario/" + versao
             + "/" + "presente" + dateFormatNoTraces + ".mp3";
+    final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
+            + MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect);
+    Button buttonDownload = (Button) findViewById(R.id.download_audio);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +88,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Download do áudio
-        final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
-                + MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect);
-        Button buttonDownload = (Button) findViewById(R.id.download_audio);
+        // Download do áudio ### Tirar Botão e testar existência de arquivo nas Activities
 
-        // Setando listener para o botão
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -267,15 +266,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        // Share Audio
-        if (id == R.id.menu_item_share_audio) {
 
-            final Context context_audio = this;
-            Intent intent_audio = new Intent(context_audio, ShareAudioActivity.class);
-            startActivity(intent_audio);
-
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
