@@ -209,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-
         return true;
     }
 
@@ -258,12 +257,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        // Share
+        // Share Text
         if (id == R.id.menu_item_share_text) {
 
             final Context context = this;
             Intent intent = new Intent(context, ShareTextActivity.class);
             startActivity(intent);
+
+            return true;
+        }
+
+        // Share Audio
+        if (id == R.id.menu_item_share_audio) {
+
+            final Context context_audio = this;
+            Intent intent_audio = new Intent(context_audio, ShareAudioActivity.class);
+            startActivity(intent_audio);
 
             return true;
         }

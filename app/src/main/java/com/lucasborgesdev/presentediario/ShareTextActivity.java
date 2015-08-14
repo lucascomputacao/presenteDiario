@@ -7,8 +7,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
+import android.widget.ActionMenuView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -22,11 +26,14 @@ import java.util.Date;
 
 public class ShareTextActivity extends Activity {
 
-
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.textview);
+//        setContentView(R.layout.shareview);
+
+//        shareview = (ActionMenuView) findViewById(R.id.menu_item_share_text);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
@@ -69,10 +76,11 @@ public class ShareTextActivity extends Activity {
             }
 
             // Intent compartilhar texto do arquivo
+            String stringApp = " - Compartilhado Via PresenteDiárioApp";
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-            share.putExtra(Intent.EXTRA_TEXT, aBuffer + " - Compartilhado Via PresenteDiárioApp");
+            share.putExtra(Intent.EXTRA_TEXT, aBuffer + stringApp);
             startActivity(Intent.createChooser(share, "Compartilhar Texto com:"));
 
             // fechar myReader

@@ -6,7 +6,8 @@
         android:id="@+id/menu_item_share_text"
         android:icon="@mipmap/ic_share_text_presente_diario"
         app:showAsAction="ifRoom"
-        android:title="Share Text"/>
+        android:title="Share Text"
+        />
 
     <item
         android:id="@+id/menu_item_share_audio"
