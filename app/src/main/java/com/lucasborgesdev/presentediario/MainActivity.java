@@ -45,14 +45,13 @@ public class MainActivity extends AppCompatActivity {
     Calendar cal = Calendar.getInstance();
     Date now = cal.getTime(); // set the current datetime in a Date-object
     final String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
+    // making URLs
+    final String url_text_redirect = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
     String dateFormatNoTraces = sdfNoTrace.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
     // Calculando a versão
     int year = cal.get(Calendar.YEAR); // get the current year
     int norma = 1997;
     int versao = year - norma;
-
-    // making URLs
-    final String url_text_redirect = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
     final String url_audio_redirect = "http://transmundial.org.br/podcast/presente_diario/" + versao
             + "/" + "presente" + dateFormatNoTraces + ".mp3";
 
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent browserInternet = new Intent(Intent.ACTION_VIEW,
-                        // Uri.parse("http://www.transmundial.org.br/presente-diario/03-08-2015"));
                         Uri.parse(url_text_redirect));
                 startActivity(browserInternet);
             }
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Ação positiva
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        Uri uri = Uri.parse(Environment.DIRECTORY_DOWNLOADS);
+                        Uri uri = Uri.parse(Environment.getExternalStorageState() + "/PresenteDiario");
                         intent.setDataAndType(uri, "text/csv");
                         startActivity(Intent.createChooser(intent, "Open folder"));
                     }
@@ -139,14 +137,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // WebActivity
+        // Mostrar texto - WebActivity
+        // Envia o contexto para poder usar outra classe
         final Context context = this;
-        Button button_webactivity = (Button) findViewById(R.id.buttonUrl);
+        Button button_webactivity = (Button) findViewById(R.id.buttonShowText);
 
         button_webactivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WebActivity.class);
+//                Intent intent = new Intent(context, WebActivity.class);
+                Intent intent = new Intent(context, TextViewActivity.class);
                 startActivity(intent);
             }
         });
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Ação positiva
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        Uri uri = Uri.parse(Environment.getExternalStorageState());
+                        Uri uri = Uri.parse(Environment.getExternalStorageState() + "PresenteDiario");
                         intent.setDataAndType(uri, "text/csv");
                         startActivity(Intent.createChooser(intent, "Open folder"));
                     }
@@ -212,7 +212,6 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-
 
 
     @Override
@@ -260,19 +259,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Share
-        if (id == R.id.menu_item_share) {
+        if (id == R.id.menu_item_share_text) {
 
-
-            // Intent funcionando
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("text/plain");
-            share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-
-            share.putExtra(Intent.EXTRA_SUBJECT,
-                    "Teste de compartilhamento Presente Diario");
-            share.putExtra(Intent.EXTRA_TEXT, "Texto teste de compartilhamento do Presente Diário");
-
-            startActivity(Intent.createChooser(share, "Compartilhar"));
+            final Context context = this;
+            Intent intent = new Intent(context, ShareTextActivity.class);
+            startActivity(intent);
 
             return true;
         }

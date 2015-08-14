@@ -17,6 +17,8 @@
         android:icon="@mipmap/ic_launcher_presente_diario">
         <activity android:name=".WebActivity"
             android:screenOrientation="landscape"/>
+        <activity android:name=".TextViewActivity"/>
+        <activity android:name=".ShareTextActivity"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >

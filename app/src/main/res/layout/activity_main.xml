@@ -23,7 +23,7 @@
         android:text="Ler o texto na internet" />
 
     <Button
-        android:id="@+id/buttonUrl"
+        android:id="@+id/buttonShowText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mostrar texto" />
@@ -31,7 +31,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonUrl"
+        android:layout_below="@id/buttonShowText"
         android:text="Baixar texto"
         android:id="@+id/download_texto"/>
 
@@ -47,15 +47,9 @@
         android:id="@+id/download_audio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/audio"
+        android:layout_below="@id/audio"
         android:layout_gravity="center"
         android:text="Baixar Áudio" />
-
-    <Button
-        android:id="@+id/btnReadSDFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
 
 
 

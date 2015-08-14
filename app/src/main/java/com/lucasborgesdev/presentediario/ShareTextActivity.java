@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -22,13 +20,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class TextViewActivity extends Activity {
+public class ShareTextActivity extends Activity {
+
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.textview);
-        setContentView(R.layout.textview);
+        setContentView(R.layout.activity_main);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
@@ -42,9 +40,6 @@ public class TextViewActivity extends Activity {
                 + dateFormatTraces + ".txt";
         final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
                 + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
-
-//        TextView textView = (TextView) findViewById(R.id.show_text);
-        EditText textView = (EditText) findViewById(R.id.textView);
         try {
             // Download de arquivo
             String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
@@ -72,28 +67,16 @@ public class TextViewActivity extends Activity {
             while ((aDataRow = myReader.readLine()) != null) {
                 aBuffer += aDataRow + "\n";
             }
-            textView.setText(aBuffer);
 
-            // Intent compartilhar texto
+            // Intent compartilhar texto do arquivo
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
             share.putExtra(Intent.EXTRA_TEXT, aBuffer + " - Compartilhado Via PresenteDiárioApp");
             startActivity(Intent.createChooser(share, "Compartilhar Texto com:"));
 
-            // Intent compartilhar audio
-            Intent shareAudio = new Intent(Intent.ACTION_SEND);
-            String sharePath = Environment.getExternalStorageDirectory()
-                    + "PresenteDiario/presente"+ dateFormatNoTraces + ".mp3";
-            shareAudio.setType("audio/mp3");
-            shareAudio.putExtra(Intent.EXTRA_STREAM,
-                    Uri.parse("sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3") );
-            startActivity(Intent.createChooser(shareAudio, "Compartilhar Áudio"));
-
+            // fechar myReader
             myReader.close();
-            Toast.makeText(getBaseContext(),
-                    "Done reading SD 'mysdfile.txt'",
-                    Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(getBaseContext(), e.getMessage(),
                     Toast.LENGTH_LONG).show();
