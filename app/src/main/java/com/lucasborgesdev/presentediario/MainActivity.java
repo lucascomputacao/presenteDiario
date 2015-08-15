@@ -55,11 +55,55 @@ public class MainActivity extends AppCompatActivity {
     final String url_text_redirect = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
     final String url_audio_redirect = "http://transmundial.org.br/podcast/presente_diario/" + versao
             + "/" + "presente" + dateFormatNoTraces + ".mp3";
+    // Strings para download de áudio
+    final String url_download_audio = "http://104.236.27.118/presente_diario/presente"
+            + dateFormatNoTraces + ".mp3";
+    final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
+            + MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect);
+    final String nameOfFile = URLUtil.guessFileName(url_audio_redirect, null,
+            MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect));
+    // Strings para download de texto do servidor
+    final String url_download_texto = "http://104.236.27.118/presente_diario/presente"
+            + dateFormatTraces + ".txt";
+    final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
+            + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Dowload Data to App (Audio and Text)
+        // Download de Áudio
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
+        request.setTitle(title_download_audio);
+        String description = "Áudio Presente Diário " + dateFormatTraces;
+        request.setDescription(description);
+        // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
+        //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
+        // Download manager
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
+
+
+        // Download do arquivo de Texto
+        String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
+                MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
+        DownloadManager.Request request_text = new DownloadManager.Request(Uri.parse(url_download_texto));
+        request_text.setTitle(title_download_texto);
+        String description_text = "Texto Presente Diário " + dateFormatTraces;
+        request_text.setDescription(description_text);
+        // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
+        //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+        request_text.allowScanningByMediaScanner();
+        request_text.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request_text.setDestinationInExternalPublicDir("PresenteDiario", nameOfFile);
+        // Download manager
+        DownloadManager manager_text = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        manager_text.enqueue(request_text);
 
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
@@ -68,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent browserInternet = new Intent(Intent.ACTION_VIEW,
-                        // Uri.parse("http://www.transmundial.org.br/presente-diario/03-08-2015"));
                         Uri.parse(url_text_redirect));
                 startActivity(browserInternet);
             }
@@ -81,36 +124,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent audioBrowserInternet = new Intent(Intent.ACTION_VIEW,
-                        //Uri.parse("http://transmundial.org.br/podcast/presente_diario/18/presente03082015.mp3"));
                         Uri.parse(url_audio_redirect));
                 startActivity(audioBrowserInternet);
             }
         });
 
         // Download do áudio
-        final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
-                + MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect);
         Button buttonDownload = (Button) findViewById(R.id.download_audio);
 
         // Setando listener para o botão
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Download do arquivo de Áudio
-                String nameOfFile = URLUtil.guessFileName(url_audio_redirect, null,
-                        MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect));
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_audio_redirect));
-                request.setTitle(title_download_audio);
-                String description = "Áudio Presente Diário " + dateFormatTraces;
-                request.setDescription(description);
-                // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
-                //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-//                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nameOfFile);
-                request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
-                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                manager.enqueue(request);
+
 
                 // Dialog Abrir diretório
                 final AlertDialog.Builder dialog_download = new AlertDialog.Builder(MainActivity.this);
@@ -152,29 +178,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Download de arquivo de texto
-        final String url_download_texto = "http://104.236.27.118/presente_diario/presente"
-                + dateFormatTraces + ".txt";
-        final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
-                + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
         Button button_downloadTexto = (Button) findViewById(R.id.download_texto);
         button_downloadTexto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Download do arquivo de Texto
-                String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
-                        MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_texto));
-                request.setTitle(title_download_texto);
-                String description = "Texto Presente Diário " + dateFormatTraces;
-                request.setDescription(description);
-                // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
-                //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir("PresenteDiario", nameOfFile);
-
-                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                manager.enqueue(request);
 
                 // Dialog Abrir diretório
                 final AlertDialog.Builder dialog_download = new AlertDialog.Builder(MainActivity.this);
@@ -212,7 +219,6 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-
 
 
     @Override
