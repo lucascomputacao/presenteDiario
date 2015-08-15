@@ -5,20 +5,21 @@
     <item
         android:id="@+id/menu_item_share_text"
         android:icon="@mipmap/ic_share_text_presente_diario"
+        android:actionProviderClass="android.widget.ShareActionProvider"
         app:showAsAction="ifRoom"
-        android:title="Share Text"
-        />
-
+        android:title="Compartilhar texto"/>
     <item
         android:id="@+id/menu_item_share_audio"
         android:icon="@mipmap/ic_share_presente_diario"
+        android:actionProviderClass="android.widget.ShareActionProvider"
         app:showAsAction="ifRoom"
-        android:title="Share Audio"/>
+        android:title="Compartilhar Audio"/>
 
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="@string/action_about"
         app:showAsAction="never" />
+
 
 </menu>
