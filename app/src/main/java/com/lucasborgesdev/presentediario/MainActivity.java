@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         manager.enqueue(request);
 
-
         // Download do arquivo de Texto
         String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
                 MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
@@ -129,41 +128,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Download do áudio
-        Button buttonDownload = (Button) findViewById(R.id.download_audio);
-
-        // Setando listener para o botão
-        buttonDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                // Dialog Abrir diretório
-                final AlertDialog.Builder dialog_download = new AlertDialog.Builder(MainActivity.this);
-                dialog_download.setTitle("Download");
-                dialog_download.setMessage("Arquivo de áudio sendo baixado"
-                        + "\n"
-                        + "Mostrar na pasta?");
-                dialog_download.setCancelable(true);
-                dialog_download.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Ação positiva
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        Uri uri = Uri.parse(Environment.DIRECTORY_DOWNLOADS);
-                        intent.setDataAndType(uri, "text/csv");
-                        startActivity(Intent.createChooser(intent, "Open folder"));
-                    }
-                });
-                dialog_download.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Ação negativa
-                    }
-                });
-                dialog_download.show();
-            }
-        });
 
         // WebActivity
         final Context context = this;
@@ -177,38 +141,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Download de arquivo de texto
-        Button button_downloadTexto = (Button) findViewById(R.id.download_texto);
-        button_downloadTexto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // Dialog Abrir diretório
-                final AlertDialog.Builder dialog_download = new AlertDialog.Builder(MainActivity.this);
-                dialog_download.setTitle("Download");
-                dialog_download.setMessage("Arquivo de texto sendo baixado"
-                        + "\n"
-                        + "Mostrar na pasta?");
-                dialog_download.setCancelable(true);
-                dialog_download.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Ação positiva
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        Uri uri = Uri.parse(Environment.getExternalStorageState());
-                        intent.setDataAndType(uri, "text/csv");
-                        startActivity(Intent.createChooser(intent, "Open folder"));
-                    }
-                });
-                dialog_download.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Ação negativa
-                    }
-                });
-                dialog_download.show();
-            }
-        });
     }
 
     @Override
@@ -265,20 +197,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        // Share
+        // Share Text
         if (id == R.id.menu_item_share_text) {
 
+            final Context context = this;
+            Intent intent = new Intent(context, ShareTextActivity.class);
+            startActivity(intent);
 
-            // Intent funcionando
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("text/plain");
-            share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+            return true;
+        }
 
-            share.putExtra(Intent.EXTRA_SUBJECT,
-                    "Teste de compartilhamento Presente Diario");
-            share.putExtra(Intent.EXTRA_TEXT, "Texto teste de compartilhamento do Presente Diário");
+        // Share Audio
+        if (id == R.id.menu_item_share_audio) {
 
-            startActivity(Intent.createChooser(share, "Compartilhar"));
+            final Context context_audio = this;
+            Intent intent_audio = new Intent(context_audio, ShareAudioActivity.class);
+            startActivity(intent_audio);
 
             return true;
         }
