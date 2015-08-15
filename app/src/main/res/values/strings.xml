@@ -8,4 +8,7 @@
     <string name="botao_ler_texto">Ler o texto na internet</string>
     <string name="botao_mostrar_texto">Mostrar texto</string>
     <string name="botao_ouvir_audio_internet">Ouvir Áudio na internet</string>
+    <string name="texto_menu_share_audio">Compartilhar texto</string>
+    <string name="item_menu_share_text">Compartilhar Audio</string>
+    <string name="item_menu_share_both">Compartilhar Áudio e Texto</string>
 </resources>

@@ -160,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-
         return true;
     }
 
@@ -225,6 +224,15 @@ public class MainActivity extends AppCompatActivity {
             final Context context_audio = this;
             Intent intent_audio = new Intent(context_audio, ShareAudioActivity.class);
             startActivity(intent_audio);
+
+            return true;
+        }
+
+        // Share Audio and Text
+        if(id == R.id.menu_item_share_both){
+            final Context context_both = this;
+            Intent intent_both = new Intent(context_both, ShareBothActivity.class);
+            startActivity(intent_both);
 
             return true;
         }
