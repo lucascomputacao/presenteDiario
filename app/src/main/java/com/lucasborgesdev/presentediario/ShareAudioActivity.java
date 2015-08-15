@@ -40,12 +40,12 @@ public class ShareAudioActivity extends Activity {
         try {
             // Verificando existência do áudio
             File file_audio = new File("/sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3");
+            Uri uri = Uri.fromFile(file_audio);
             if (file_audio.exists()) {
                 // Intent compartilhar audio
                 Intent shareAudio = new Intent(Intent.ACTION_SEND);
                 shareAudio.setType("audio/mp3");
-                shareAudio.putExtra(Intent.EXTRA_STREAM,
-                        Uri.parse("sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3"));
+                shareAudio.putExtra(Intent.EXTRA_STREAM,uri);
                 startActivity(Intent.createChooser(shareAudio, "Compartilhar Áudio com:"));
             } else {
                 // Mensagem para usuário
