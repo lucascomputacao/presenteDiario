@@ -148,4 +148,10 @@ public class ShareBothActivity extends Activity {
             }
         }
     }
+
+    protected void onPause() {
+        super.onPause();
+        // Resolvendo tela em branco após compartilhar
+        finish();
+    }
 }

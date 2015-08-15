@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,8 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         // Dowload Data to App (Audio and Text)
         // Verificando existência do áudio
@@ -211,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
         // Share Text
         if (id == R.id.menu_item_share_text) {
 
+
             final Context context = this;
             Intent intent = new Intent(context, ShareTextActivity.class);
             startActivity(intent);
@@ -229,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Share Audio and Text
-        if(id == R.id.menu_item_share_both){
+        if (id == R.id.menu_item_share_both) {
             final Context context_both = this;
             Intent intent_both = new Intent(context_both, ShareBothActivity.class);
             startActivity(intent_both);

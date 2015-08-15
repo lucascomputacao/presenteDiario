@@ -29,7 +29,6 @@ public class ShareTextActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
@@ -101,4 +100,11 @@ public class ShareTextActivity extends Activity {
         }
 
     }
+
+    protected void onPause() {
+        super.onPause();
+        // Resolvendo tela em branco após compartilhar
+        finish();
+    }
+
 }
