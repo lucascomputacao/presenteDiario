@@ -37,6 +37,9 @@ public class ShareAudioActivity extends Activity {
         final String nameOfFile = URLUtil.guessFileName(url_download_audio, null,
                 MimeTypeMap.getFileExtensionFromUrl(url_download_audio));
 
+
+        Toast.makeText(getBaseContext(), "Compartilhar Áudio", Toast.LENGTH_LONG).show();
+
         try {
             // Verificando existência do áudio
             File file_audio = new File("/sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3");

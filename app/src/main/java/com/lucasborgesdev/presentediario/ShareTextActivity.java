@@ -45,6 +45,9 @@ public class ShareTextActivity extends Activity {
         String nameOfFileText = URLUtil.guessFileName(url_download_texto, null,
                 MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
 
+
+        Toast.makeText(getBaseContext(), "Compartilhar Texto", Toast.LENGTH_LONG).show();
+
         try {
             // Verficando existência de texto
             File file_texto = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
