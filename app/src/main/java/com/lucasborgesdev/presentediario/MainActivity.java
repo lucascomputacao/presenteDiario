@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
     final String url_download_audio = "http://104.236.27.118/presente_diario/presente"
             + dateFormatNoTraces + ".mp3";
     final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
-            + MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect);
-    final String nameOfFile = URLUtil.guessFileName(url_audio_redirect, null,
-            MimeTypeMap.getFileExtensionFromUrl(url_audio_redirect));
+            + MimeTypeMap.getFileExtensionFromUrl(url_download_audio);
+    final String nameOfFile = URLUtil.guessFileName(url_download_audio, null,
+            MimeTypeMap.getFileExtensionFromUrl(url_download_audio));
     // Strings para download de texto do servidor
     final String url_download_texto = "http://104.236.27.118/presente_diario/presente"
             + dateFormatTraces + ".txt";
