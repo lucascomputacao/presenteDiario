@@ -23,6 +23,7 @@ public class ShareAudioActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.webcontent);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
@@ -45,7 +46,7 @@ public class ShareAudioActivity extends Activity {
                 // Intent compartilhar audio
                 Intent shareAudio = new Intent(Intent.ACTION_SEND);
                 shareAudio.setType("audio/mp3");
-                shareAudio.putExtra(Intent.EXTRA_STREAM,uri);
+                shareAudio.putExtra(Intent.EXTRA_STREAM, uri);
                 startActivity(Intent.createChooser(shareAudio, "Compartilhar Áudio com:"));
             } else {
                 // Mensagem para usuário
