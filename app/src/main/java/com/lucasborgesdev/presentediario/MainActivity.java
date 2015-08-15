@@ -23,6 +23,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,41 +69,52 @@ public class MainActivity extends AppCompatActivity {
     final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
             + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
 
+    String nameOfFileText = URLUtil.guessFileName(url_download_texto, null,
+            MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Dowload Data to App (Audio and Text)
-        // Download de Áudio
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
-        request.setTitle(title_download_audio);
-        String description = "Áudio Presente Diário " + dateFormatTraces;
-        request.setDescription(description);
-        // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
-        //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
-        // Download manager
-        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        manager.enqueue(request);
+        // Verificando existência do áudio
+        File file_audio = new File("/sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3");
+
+        if (!file_audio.exists()) {
+            // Download de Áudio
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
+            request.setTitle(title_download_audio);
+            String description = "Áudio Presente Diário " + dateFormatTraces;
+            request.setDescription(description);
+            // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
+            //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
+            // Download manager
+            DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            manager.enqueue(request);
+        }
 
         // Download do arquivo de Texto
-        String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
-                MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
-        DownloadManager.Request request_text = new DownloadManager.Request(Uri.parse(url_download_texto));
-        request_text.setTitle(title_download_texto);
-        String description_text = "Texto Presente Diário " + dateFormatTraces;
-        request_text.setDescription(description_text);
-        // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
-        //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-        request_text.allowScanningByMediaScanner();
-        request_text.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request_text.setDestinationInExternalPublicDir("PresenteDiario", nameOfFile);
-        // Download manager
-        DownloadManager manager_text = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        manager_text.enqueue(request_text);
+        File file_texto = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
+        // Verificando existência de texto
+        if (!file_texto.exists()) {
+            // Download texto
+            DownloadManager.Request request_text = new DownloadManager.Request(Uri.parse(url_download_texto));
+            request_text.setTitle(title_download_texto);
+            String description_text = "Texto Presente Diário " + dateFormatTraces;
+            request_text.setDescription(description_text);
+            // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
+            //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+            request_text.allowScanningByMediaScanner();
+            request_text.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request_text.setDestinationInExternalPublicDir("PresenteDiario", nameOfFileText);
+            // Download manager
+            DownloadManager manager_text = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            manager_text.enqueue(request_text);
+        }
 
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
