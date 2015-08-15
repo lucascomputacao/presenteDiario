@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="@color/cinza_bg_presente"
     tools:context=".MainActivity">
 
 
@@ -12,6 +13,7 @@
         style="@style/Base.TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="@string/titulo"
         android:textSize="@dimen/abc_action_bar_content_inset_material" />
 
@@ -20,13 +22,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Ler o texto na internet" />
+        android:text="@string/botao_ler_texto" />
 
     <Button
         android:id="@+id/buttonUrl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mostrar texto" />
+        android:text="@string/botao_mostrar_texto" />
 
     <Button
         android:id="@+id/audio"
@@ -34,9 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonUrl"
         android:layout_gravity="center_horizontal"
-        android:text="Ouvir Áudio na internet" />
-
-
+        android:text="@string/botao_ouvir_audio_internet" />
 
 
 

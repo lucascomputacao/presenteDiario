@@ -23,7 +23,6 @@ public class ShareAudioActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.webcontent);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");

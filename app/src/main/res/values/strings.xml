@@ -5,4 +5,7 @@
     <string name="action_about">Sobre este Aplicativo</string>
     <string name="send_text_to">Enviar texto para:</string>
     <string name="send_audio_to">Enviar áudio para:</string>
+    <string name="botao_ler_texto">Ler o texto na internet</string>
+    <string name="botao_mostrar_texto">Mostrar texto</string>
+    <string name="botao_ouvir_audio_internet">Ouvir Áudio na internet</string>
 </resources>
