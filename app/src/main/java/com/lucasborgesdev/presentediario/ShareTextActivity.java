@@ -45,7 +45,7 @@ public class ShareTextActivity extends Activity {
                 MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
 
 
-        Toast.makeText(getBaseContext(), "Você escolheu compartilhar Texto.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Você escolheu compartilhar Texto.", Toast.LENGTH_SHORT).show();
 
         try {
             // Verficando existência de texto
@@ -75,13 +75,8 @@ public class ShareTextActivity extends Activity {
                 myReader.close();
             } else {
                 // Mensagem para usuário
-                Toast.makeText(getBaseContext(),
-                        "Arquivo não encontrado." +
-                                "\nArquivo de texto será baixado.\nClique no botão compatilhar após o término do download!",
-                        Toast.LENGTH_LONG).show();
-                Toast.makeText(getBaseContext(),
-                        "Arquivo não encontrado." +
-                                "\nArquivo de texto será baixado.\nClique no botão compatilhar após o término do download!",
+                Toast.makeText(getBaseContext(),"Arquivo de texto será baixado." +
+                                "\nClique no botão compatilhar após o término do download!",
                         Toast.LENGTH_LONG).show();
                 // Download texto
                 DownloadManager.Request request_text = new DownloadManager.Request(Uri.parse(url_download_texto));

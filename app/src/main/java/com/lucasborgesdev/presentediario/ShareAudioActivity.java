@@ -38,7 +38,7 @@ public class ShareAudioActivity extends Activity {
                 MimeTypeMap.getFileExtensionFromUrl(url_download_audio));
 
 
-        Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio.", Toast.LENGTH_SHORT).show();
 
         try {
             // Verificando existência do áudio

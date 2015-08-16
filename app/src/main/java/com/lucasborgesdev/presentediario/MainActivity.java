@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             // Setando Título do dialog
             alertDialog.setTitle("Download de Arquivos");
             // Mensagem do dialog
-            alertDialog.setMessage("Deseja baixar os arquivos agora?");
+            alertDialog.setMessage("Arquivos não encontrados!\nDeseja baixar os arquivos agora?");
             //
             alertDialog.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
                 @Override
