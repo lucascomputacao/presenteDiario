@@ -76,7 +76,7 @@ public class ShareTextActivity extends Activity {
             } else {
                 // Mensagem para usuário
                 Toast.makeText(getBaseContext(),
-                        "Arquivo de texto será baixado\nClique em compatilhar após o término do download!'",
+                        "Arquivo de texto será baixado\nClique em compatilhar após o término do download!",
                         Toast.LENGTH_LONG).show();
                 // Download texto
                 DownloadManager.Request request_text = new DownloadManager.Request(Uri.parse(url_download_texto));
@@ -91,6 +91,9 @@ public class ShareTextActivity extends Activity {
                 // Download manager
                 DownloadManager manager_text = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 manager_text.enqueue(request_text);
+
+                // Finaliza View enquanto faz o download do arquivo
+                finish();
 
             }
 

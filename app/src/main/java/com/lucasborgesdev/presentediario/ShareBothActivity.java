@@ -125,7 +125,7 @@ public class ShareBothActivity extends Activity {
             // Baixar o audio
             // Mensagem para usuário
             Toast.makeText(getBaseContext(),
-                    "Arquivo de áudio será baixado\nClique em compatilhar após o término do download!'",
+                    "Arquivo de áudio será baixado\nClique em compatilhar após o término do download!",
                     Toast.LENGTH_LONG).show();
             // Download de Áudio
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
@@ -144,7 +144,7 @@ public class ShareBothActivity extends Activity {
             // Se não houver arquivo de texto faz o download do texto
             if (!file_texto.exists()) {
                 Toast.makeText(getBaseContext(),
-                        "Arquivo de texto será baixado\nClique em compatilhar após o término do download!'",
+                        "Arquivo de texto será baixado\nClique em compatilhar após o término do download!",
                         Toast.LENGTH_LONG).show();
                 // Download texto
                 DownloadManager.Request request_text = new DownloadManager.Request(Uri.parse(url_download_texto));
@@ -161,6 +161,10 @@ public class ShareBothActivity extends Activity {
                 manager_text.enqueue(request_text);
             }
         }
+
+
+        // Finaliza View enquanto faz o download do(s) arquivo(s)
+        finish();
     }
 
     protected void onPause() {
