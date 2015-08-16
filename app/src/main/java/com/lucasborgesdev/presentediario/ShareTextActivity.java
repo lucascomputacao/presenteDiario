@@ -45,7 +45,7 @@ public class ShareTextActivity extends Activity {
                 MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
 
 
-        Toast.makeText(getBaseContext(), "Compartilhar Texto", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Você escolheu compartilhar Texto.", Toast.LENGTH_LONG).show();
 
         try {
             // Verficando existência de texto

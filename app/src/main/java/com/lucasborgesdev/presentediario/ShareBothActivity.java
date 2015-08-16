@@ -45,15 +45,28 @@ public class ShareBothActivity extends Activity {
         final String nameOfFileText = URLUtil.guessFileName(url_download_texto, null,
                 MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
 
-        Toast.makeText(getBaseContext(), "Compartilhar Áudio e Texto", Toast.LENGTH_LONG).show();
 
         // Verificando existência do áudio
         File file_audio = new File("/sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3");
         Uri uri = Uri.fromFile(file_audio);
         File file_texto = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
+
+        // Se audio existe
         if (file_audio.exists()) {
+            // Se áudio e texto existem
             if (file_texto.exists()) {
                 try {
+
+                    Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio e Texto.", Toast.LENGTH_LONG).show();
+                    int i = 0;
+                    while (i < 4) {
+
+                        Toast.makeText(getBaseContext(),
+                                "Compartilha o Áudio e depois o Texto." +
+                                        "\nVocê pode compartilhar com aplicativos diferentes, se preferir.",
+                                Toast.LENGTH_LONG).show();
+                        i++;
+                    }
                     // Leitura de arquivo
                     File myFile = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
                     FileInputStream fIn = new FileInputStream(myFile);
@@ -72,6 +85,7 @@ public class ShareBothActivity extends Activity {
                     share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                     share.putExtra(Intent.EXTRA_TEXT, aBuffer + stringApp);
                     startActivity(Intent.createChooser(share, "Compartilhar Texto com:"));
+
 
                     // fechar myReader
                     myReader.close();
