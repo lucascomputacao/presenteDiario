@@ -20,6 +20,7 @@ import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.ShareActionProvider;
+import android.widget.Toast;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -128,6 +129,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getBaseContext(), "Você escolheu ler o Texto na internet.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Será aberta uma página no seu navegador.", Toast.LENGTH_LONG).show();
+
                 Intent browserInternet = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(url_text_redirect));
                 startActivity(browserInternet);
@@ -140,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
         audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getBaseContext(), "Você escolheu ouvir o Áudio na internet.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Será aberta uma página no seu navegador.", Toast.LENGTH_LONG).show();
                 Intent audioBrowserInternet = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(url_audio_redirect));
                 startActivity(audioBrowserInternet);
@@ -154,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
         button_webactivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getBaseContext(), "Você escolheu mostrar o Texto.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "O Texto será exibido dentro do aplicativo (Não abre navegador).", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, WebActivity.class);
                 startActivity(intent);
             }
