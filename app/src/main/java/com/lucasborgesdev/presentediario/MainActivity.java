@@ -84,10 +84,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
@@ -139,13 +137,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-
         super.onStart();
 
         final File file_audio = new File("/sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3");
         final File file_texto = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
 
-        // Não colocado no onCreate para permitir que seja verificado em tempo de execução
+        // Impede o empilhamento dos dialog de download após perder e ganhar foco
         if (dialogDownload) {
             // Verificando existência de arquivos
             if (!file_audio.exists() || !file_audio.exists()) {
@@ -217,11 +214,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher_presente_diario);
+        }
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -270,7 +271,6 @@ public class MainActivity extends AppCompatActivity {
         // Share Text
         if (id == R.id.menu_item_share_text) {
 
-
             final Context context = this;
             Intent intent = new Intent(context, ShareTextActivity.class);
             startActivity(intent);
@@ -290,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Share Audio and Text
         if (id == R.id.menu_item_share_both) {
+
             final Context context_both = this;
             Intent intent_both = new Intent(context_both, ShareBothActivity.class);
             startActivity(intent_both);
