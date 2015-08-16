@@ -87,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Colocando ícone na ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher_presente_diario);
+        }
+
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
 
@@ -214,11 +220,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher_presente_diario);
-        }
-
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         return true;
