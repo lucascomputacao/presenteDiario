@@ -59,7 +59,7 @@ public class ShareBothActivity extends Activity {
 
                     Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio e Texto.", Toast.LENGTH_LONG).show();
                     int i = 0;
-                    while (i < 4) {
+                    while (i < 2) {
 
                         Toast.makeText(getBaseContext(),
                                 "Compartilha o Áudio e depois o Texto." +

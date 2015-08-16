@@ -53,7 +53,7 @@ public class ShareAudioActivity extends Activity {
             } else {
                 // Mensagem para usuário
                 Toast.makeText(getBaseContext(),
-                        "Arquivo de áudio será baixado\nClique em compatilhar após o término do download!",
+                        "Arquivo de áudio será baixado.\nClique no botão compatilhar após o término do download!",
                         Toast.LENGTH_LONG).show();
                 // Download de Áudio
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));

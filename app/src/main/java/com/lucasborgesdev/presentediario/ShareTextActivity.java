@@ -76,7 +76,12 @@ public class ShareTextActivity extends Activity {
             } else {
                 // Mensagem para usuário
                 Toast.makeText(getBaseContext(),
-                        "Arquivo de texto será baixado\nClique em compatilhar após o término do download!",
+                        "Arquivo não encontrado." +
+                                "\nArquivo de texto será baixado.\nClique no botão compatilhar após o término do download!",
+                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),
+                        "Arquivo não encontrado." +
+                                "\nArquivo de texto será baixado.\nClique no botão compatilhar após o término do download!",
                         Toast.LENGTH_LONG).show();
                 // Download texto
                 DownloadManager.Request request_text = new DownloadManager.Request(Uri.parse(url_download_texto));
