@@ -3,12 +3,14 @@
 
     <string name="titulo">Presente Diário - O seu momento devocional!</string>
     <string name="action_about">Sobre este Aplicativo</string>
-    <string name="send_text_to">Enviar texto para:</string>
-    <string name="send_audio_to">Enviar áudio para:</string>
-    <string name="botao_ler_texto">Ler o texto na internet</string>
-    <string name="botao_mostrar_texto">Mostrar texto</string>
+    <string name="send_text_to">Enviar Texto para:</string>
+    <string name="send_audio_to">Enviar Áudio para:</string>
+    <string name="botao_ler_texto">Ler o Texto na Internet</string>
+    <string name="botao_mostrar_texto">Mostrar Texto Aqui</string>
     <string name="botao_ouvir_audio_internet">Ouvir Áudio na internet</string>
-    <string name="texto_menu_share_audio">Compartilhar texto</string>
-    <string name="item_menu_share_text">Compartilhar Audio</string>
+    <string name="texto_menu_share_audio">Compartilhar Texto</string>
+    <string name="item_menu_share_text">Compartilhar Áudio</string>
     <string name="item_menu_share_both">Compartilhar Áudio e Texto</string>
+    <string name="dropdownMenu">dropdownMenu</string>
+    <string name="select_option_text">Selecione uma das opções abaixo ou o menu compartilhar</string>
 </resources>

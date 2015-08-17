@@ -2,24 +2,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
+
     <item
-        android:id="@+id/menu_item_share_text"
-        android:actionProviderClass="android.widget.ShareActionProvider"
-        android:icon="@mipmap/ic_share_text_presente_diario"
-        android:title="@string/texto_menu_share_audio"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/menu_item_share_audio"
-        android:actionProviderClass="android.widget.ShareActionProvider"
-        android:icon="@mipmap/ic_share_presente_diario"
-        android:title="@string/item_menu_share_text"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/menu_item_share_both"
-        android:actionProviderClass="android.widget.ShareActionProvider"
-        android:icon="@mipmap/ic_share_both_presente_diario"
-        android:title="@string/item_menu_share_both"
-        app:showAsAction="always" />
+        android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
+        android:title="@string/dropdownMenu"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/menu_item_share_audio"
+                android:actionProviderClass="android.widget.ShareActionProvider"
+                android:icon="@drawable/ic_ic_share_audio_green_presente_diario"
+                android:title="@string/item_menu_share_text"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/menu_item_share_text"
+                android:actionProviderClass="android.widget.ShareActionProvider"
+                android:icon="@drawable/ic_ic_share_text_green_presente_diario"
+                android:title="@string/texto_menu_share_audio"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/menu_item_share_both"
+                android:actionProviderClass="android.widget.ShareActionProvider"
+                android:icon="@drawable/ic_share_both_green_presente_diario"
+                android:title="@string/item_menu_share_both"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
+
 
     <item
         android:id="@+id/action_about"
