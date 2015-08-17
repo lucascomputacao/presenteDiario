@@ -137,6 +137,22 @@ public class MainActivity extends AppCompatActivity {
                     intent.setAction(android.content.Intent.ACTION_VIEW);
                     intent.setDataAndType(uri_audio, "audio/*");
                     startActivity(intent);
+                }else{
+                    Toast.makeText(getBaseContext(), "Áudio será baixado\nEspero o término do dowload e tente novamente",
+                            Toast.LENGTH_SHORT).show();
+                    // Download de Áudio
+                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
+                    request.setTitle(title_download_audio);
+                    String description = "Áudio Presente Diário " + dateFormatTraces;
+                    request.setDescription(description);
+                    // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
+                    //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+                    request.allowScanningByMediaScanner();
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
+                    // Download manager
+                    DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                    manager.enqueue(request);
                 }
 
 
