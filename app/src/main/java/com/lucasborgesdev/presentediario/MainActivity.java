@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         // Redirection button to text page
         Button button = (Button) findViewById(R.id.texto);
 
@@ -126,10 +125,20 @@ public class MainActivity extends AppCompatActivity {
         final Context audio_context = this;
         Button button_audio = (Button) findViewById(R.id.audio);
 
-        button_audio.setOnClickListener(new View.OnClickListener(){
+        button_audio.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                // Play Audio / Abir áudio
+                File file_audio = new File("/sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3");
+                Uri uri_audio = Uri.fromFile(file_audio);
+                if (file_audio.exists()) {
+                    Intent intent = new Intent();
+                    intent.setAction(android.content.Intent.ACTION_VIEW);
+                    intent.setDataAndType(uri_audio, "audio/*");
+                    startActivity(intent);
+                }
+
 
             }
         });
@@ -146,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         // Impede o empilhamento dos dialog de download após perder e ganhar foco
         if (dialogDownload) {
             // Verificando existência de arquivos
-            if (!file_audio.exists() || !file_audio.exists()) {
+            if (!file_audio.exists() || !file_texto.exists()) {
 
                 // Impede que dialog de download de arquivos seja mostrada mais de uma vez
                 setDialogDownloadFalse();
@@ -163,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Dowload Data to App (Audio and Text)
                         Toast textToast = Toast.makeText(getBaseContext(), "Baixando Arquivos.", Toast.LENGTH_LONG);
-                        textToast.setGravity(Gravity.CENTER_HORIZONTAL,0,0);
+                        textToast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                         textToast.show();
 
                         // Verificando existência do áudio
@@ -199,8 +208,8 @@ public class MainActivity extends AppCompatActivity {
                             DownloadManager manager_text = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                             manager_text.enqueue(request_text);
 
-                            Toast mytoast = Toast.makeText(getBaseContext(), "Escolha uma das opções ou clique no Menu Compartilhar.",Toast.LENGTH_LONG);
-                            mytoast.setGravity(Gravity.CENTER_HORIZONTAL,0,0);
+                            Toast mytoast = Toast.makeText(getBaseContext(), "Escolha uma das opções ou clique no Menu Compartilhar.", Toast.LENGTH_LONG);
+                            mytoast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                             mytoast.show();
                         } //final existe texto
                     } // final onclick
@@ -210,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //
-                        Toast mytoast = Toast.makeText(getBaseContext(), "Escolha uma das opções ou clique no Menu Compartilhar.",Toast.LENGTH_LONG);
+                        Toast mytoast = Toast.makeText(getBaseContext(), "Escolha uma das opções ou clique no Menu Compartilhar.", Toast.LENGTH_LONG);
                         mytoast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                         mytoast.show();
 
