@@ -79,7 +79,7 @@ public class ShareBothActivity extends Activity {
                     }
 
                     // Compartilhar Texto
-                    String stringApp = " - Compartilhado Via PresenteDiárioApp";
+                    String stringApp = " - Compartilhado Via Download_PresenteDiário";
                     Intent share = new Intent(Intent.ACTION_SEND);
                     share.setType("text/plain");
                     share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
