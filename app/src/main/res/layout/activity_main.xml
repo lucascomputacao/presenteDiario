@@ -2,37 +2,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:gravity="center_horizontal|left"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:weightSum="1">
 
     <Button
         android:id="@+id/texto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/botao_ler_texto"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
         style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
         android:textStyle="bold"
-        android:layout_margin="@dimen/abc_button_inset_vertical_material" />
+        android:layout_margin="@dimen/abc_button_inset_vertical_material"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/texto_internet_button" />
+
+    <Button
+        android:id="@+id/audio_internet"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textStyle="bold"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+        android:layout_margin="@dimen/abc_button_inset_vertical_material"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/audio_internet_button" />
 
     <Button
         android:id="@+id/buttonUrl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/botao_mostrar_texto"
+        android:layout_height="100dp"
         android:textStyle="bold"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_margin="@dimen/abc_button_inset_vertical_material" />
+        android:layout_margin="@dimen/abc_button_inset_vertical_material"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/texto_button" />
 
 
     <Button
         android:id="@+id/audio"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/botao_ouvir_audio_internet"
+        android:layout_height="100dp"
         android:textStyle="bold"
         style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-        android:layout_margin="@dimen/abc_button_inset_vertical_material"/>
+        android:layout_margin="@dimen/abc_button_inset_vertical_material"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/audio_button" />
 
     <TextView
         android:id="@+id/titulo"
@@ -40,7 +58,9 @@
         android:layout_height="wrap_content"
         android:text="@string/titulo"
         android:textStyle="bold|italic"
-        android:layout_marginTop="300dp" />
+        android:layout_marginTop="30dp"
+
+        android:layout_gravity="center_horizontal"/>
 
 
 </LinearLayout>
