@@ -16,7 +16,7 @@
         android:layout_margin="@dimen/abc_button_inset_vertical_material"
         android:textSize="18dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/texto_internet_button" />
+        android:background="@drawable/texto_internet_button_noshadow" />
 
     <Button
         android:id="@+id/audio_internet"
@@ -27,7 +27,7 @@
         android:layout_margin="@dimen/abc_button_inset_vertical_material"
         android:textSize="18dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/audio_internet_button" />
+        android:background="@drawable/audio_internet_button_noshadow" />
 
     <Button
         android:id="@+id/buttonUrl"
@@ -38,7 +38,7 @@
         android:layout_margin="@dimen/abc_button_inset_vertical_material"
         android:textSize="18dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/texto_button" />
+        android:background="@drawable/texto_button_noshadow" />
 
 
     <Button
@@ -50,7 +50,7 @@
         android:layout_margin="@dimen/abc_button_inset_vertical_material"
         android:textSize="18dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/audio_button" />
+        android:background="@drawable/audio_button_noshadow" />
 
     <TextView
         android:id="@+id/titulo"
