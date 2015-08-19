@@ -30,7 +30,7 @@
                 android:id="@+id/menu_item_share_sametime"
                 android:actionProviderClass="android.widget.ShareActionProvider"
                 android:icon="@drawable/ic_share_both_green_presente_diario"
-                android:title="Compartilhar Áudio e Texto ao mesmo tempo"
+                android:title="@string/share_sametime"
                 app:showAsAction="ifRoom" />
         </menu>
     </item>

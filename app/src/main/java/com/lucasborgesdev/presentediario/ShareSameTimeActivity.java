@@ -59,12 +59,8 @@ public class ShareSameTimeActivity extends Activity {
             if (file_texto.exists()) {
                 try {
 
-                    Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio e Texto.", Toast.LENGTH_SHORT).show();
-
                     Toast.makeText(getBaseContext(),
-                            "Compartilha o Áudio e depois o Texto." +
-                                    "\nVocê pode compartilhar com aplicativos diferentes, se preferir.",
-                            Toast.LENGTH_LONG).show();
+                            "Compartilha o Áudio e o Texto no mesmo Aplicativo.", Toast.LENGTH_LONG).show();
 
                     // Leitura de arquivo
                     File myFile = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");

@@ -59,7 +59,8 @@ public class ShareBothActivity extends Activity {
             if (file_texto.exists()) {
                 try {
 
-                    Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio e Texto.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio e Texto",
+                            Toast.LENGTH_SHORT).show();
 
                     Toast.makeText(getBaseContext(),
                             "Compartilha o Áudio e depois o Texto." +
