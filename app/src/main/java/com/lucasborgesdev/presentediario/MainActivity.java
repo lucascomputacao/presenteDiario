@@ -331,6 +331,14 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        // Share at the same time
+        if (id == R.id.menu_item_share_sametime){
+            final Context context_sametime = this;
+            Intent intent_sametime = new Intent(context_sametime, ShareSameTimeActivity.class);
+            startActivity(intent_sametime);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

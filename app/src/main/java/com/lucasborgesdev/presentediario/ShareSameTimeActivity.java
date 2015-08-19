@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ShareBothActivity extends Activity {
+public class ShareSameTimeActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -77,21 +77,17 @@ public class ShareBothActivity extends Activity {
                         aBuffer += aDataRow + "\n";
                     }
 
+                    myReader.close();
+
                     // Compartilhar Texto
                     String stringApp = " - Compartilhado Via Download_PresenteDiário";
                     Intent share = new Intent(Intent.ACTION_SEND);
                     share.setType("text/plain");
-                    share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+//                    share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                     share.putExtra(Intent.EXTRA_TEXT, aBuffer + stringApp);
-                    startActivity(Intent.createChooser(share, "Compartilhar Texto com:"));
-//                    // fechar myReader
-                    myReader.close();
-
-                    // Compartilhar Audio
-                    Intent shareAudio = new Intent(Intent.ACTION_SEND);
-                    shareAudio.setType("audio/mp3");
-                    shareAudio.putExtra(Intent.EXTRA_STREAM, uri_audio);
-                    startActivity(Intent.createChooser(shareAudio, "Compartilhar Áudio com:"));
+                    share.setType("audio/*");
+                    share.putExtra(Intent.EXTRA_STREAM, uri_audio);
+                    startActivity(Intent.createChooser(share, "Compartilhar Áudio e Texto ao mesmo tempo com:"));
 
                 } catch (Exception e) {
                     Toast.makeText(getBaseContext(), e.getMessage(),

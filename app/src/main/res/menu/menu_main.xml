@@ -26,6 +26,12 @@
                 android:icon="@drawable/ic_share_both_green_presente_diario"
                 android:title="@string/item_menu_share_both"
                 app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/menu_item_share_sametime"
+                android:actionProviderClass="android.widget.ShareActionProvider"
+                android:icon="@drawable/ic_share_both_green_presente_diario"
+                android:title="Compartilhar Áudio e Texto ao mesmo tempo"
+                app:showAsAction="ifRoom" />
         </menu>
     </item>
 
