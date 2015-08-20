@@ -43,8 +43,9 @@ public class TextViewActivity extends Activity {
         final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
                 + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
 
-//        TextView textView = (TextView) findViewById(R.id.show_text);
-        EditText textView = (EditText) findViewById(R.id.textView);
+        TextView textView = (TextView) findViewById(R.id.textView);
+//        EditText textView = (EditText) findViewById(R.id.textView);
+
         try {
             // Download de arquivo
             String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
@@ -72,25 +73,26 @@ public class TextViewActivity extends Activity {
             while ((aDataRow = myReader.readLine()) != null) {
                 aBuffer += aDataRow + "\n";
             }
+            myReader.close();
             textView.setText(aBuffer);
 
             // Intent compartilhar texto
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("text/plain");
-            share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-            share.putExtra(Intent.EXTRA_TEXT, aBuffer + " - Compartilhado Via PresenteDiárioApp");
-            startActivity(Intent.createChooser(share, "Compartilhar Texto com:"));
+//            Intent share = new Intent(Intent.ACTION_SEND);
+//            share.setType("text/plain");
+//            share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+//            share.putExtra(Intent.EXTRA_TEXT, aBuffer + " - Compartilhado Via PresenteDiárioApp");
+//            startActivity(Intent.createChooser(share, "Compartilhar Texto com:"));
+//
+//            // Intent compartilhar audio
+//            Intent shareAudio = new Intent(Intent.ACTION_SEND);
+//            String sharePath = Environment.getExternalStorageDirectory()
+//                    + "PresenteDiario/presente"+ dateFormatNoTraces + ".mp3";
+//            shareAudio.setType("audio/mp3");
+//            shareAudio.putExtra(Intent.EXTRA_STREAM,
+//                    Uri.parse("sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3") );
+//            startActivity(Intent.createChooser(shareAudio, "Compartilhar Áudio"));
 
-            // Intent compartilhar audio
-            Intent shareAudio = new Intent(Intent.ACTION_SEND);
-            String sharePath = Environment.getExternalStorageDirectory()
-                    + "PresenteDiario/presente"+ dateFormatNoTraces + ".mp3";
-            shareAudio.setType("audio/mp3");
-            shareAudio.putExtra(Intent.EXTRA_STREAM,
-                    Uri.parse("sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3") );
-            startActivity(Intent.createChooser(shareAudio, "Compartilhar Áudio"));
 
-            myReader.close();
             Toast.makeText(getBaseContext(),
                     "Done reading SD 'mysdfile.txt'",
                     Toast.LENGTH_SHORT).show();

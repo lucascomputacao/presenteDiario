@@ -19,6 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".WebActivity"/>
+        <activity android:name=".TextViewActivity" />
         <activity
             android:name=".ShareSameTimeActivity">
             <meta-data

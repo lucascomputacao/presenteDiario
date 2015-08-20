@@ -15,6 +15,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -116,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Você escolheu mostrar o Texto.", Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getBaseContext(), "O Texto será exibido dentro do aplicativo (Não abre navegador).", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, WebActivity.class);
+//                Intent intent = new Intent(context, WebActivity.class);
+                Intent intent = new Intent(context, TextViewActivity.class);
                 startActivity(intent);
             }
         });
