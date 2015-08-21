@@ -35,21 +35,43 @@ public class TextViewActivity extends Activity {
         Calendar cal = Calendar.getInstance();
         Date now = cal.getTime(); // set the current datetime in a Date-object
         final String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
-        final String dateFormatNoTraces = sdfNoTrace.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
-
-        // Download de arquivo de texto
         final String url_download_texto = "http://104.236.27.118/presente_diario/presente"
                 + dateFormatTraces + ".txt";
+        final String dateFormatNoTraces = sdfNoTrace.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
+
         final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
                 + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
+        String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
+                MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
 
         TextView textView = (TextView) findViewById(R.id.textView);
-//        EditText textView = (EditText) findViewById(R.id.textView);
+        File file_texto = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
+        Uri uri_texto = Uri.fromFile(file_texto);
 
-        try {
+        // Baixa o arquivo se ele não existir
+        if (file_texto.exists()) {
+            try {
+                // Leitura de arquivo
+                File myFile = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
+                FileInputStream fIn = new FileInputStream(myFile);
+                BufferedReader myReader = new BufferedReader(
+                        new InputStreamReader(fIn));
+                String aDataRow = "";
+                String aBuffer = "";
+                while ((aDataRow = myReader.readLine()) != null) {
+                    aBuffer += aDataRow + "\n";
+                }
+                myReader.close();
+                textView.setText(aBuffer);
+
+            } catch (Exception e) {
+                Toast.makeText(getBaseContext(), e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Arquivo de Texto sendo baixado.\nTente novamente após o download.",
+                    Toast.LENGTH_LONG).show();
             // Download de arquivo
-            String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
-                    MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_texto));
             request.setTitle(title_download_texto);
             String description = "Texto Presente Diário " + dateFormatTraces;
@@ -63,43 +85,9 @@ public class TextViewActivity extends Activity {
             DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
             manager.enqueue(request);
 
-            // Leitura de arquivo
-            File myFile = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
-            FileInputStream fIn = new FileInputStream(myFile);
-            BufferedReader myReader = new BufferedReader(
-                    new InputStreamReader(fIn));
-            String aDataRow = "";
-            String aBuffer = "";
-            while ((aDataRow = myReader.readLine()) != null) {
-                aBuffer += aDataRow + "\n";
-            }
-            myReader.close();
-            textView.setText(aBuffer);
-
-            // Intent compartilhar texto
-//            Intent share = new Intent(Intent.ACTION_SEND);
-//            share.setType("text/plain");
-//            share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-//            share.putExtra(Intent.EXTRA_TEXT, aBuffer + " - Compartilhado Via PresenteDiárioApp");
-//            startActivity(Intent.createChooser(share, "Compartilhar Texto com:"));
-//
-//            // Intent compartilhar audio
-//            Intent shareAudio = new Intent(Intent.ACTION_SEND);
-//            String sharePath = Environment.getExternalStorageDirectory()
-//                    + "PresenteDiario/presente"+ dateFormatNoTraces + ".mp3";
-//            shareAudio.setType("audio/mp3");
-//            shareAudio.putExtra(Intent.EXTRA_STREAM,
-//                    Uri.parse("sdcard/PresenteDiario/presente" + dateFormatNoTraces + ".mp3") );
-//            startActivity(Intent.createChooser(shareAudio, "Compartilhar Áudio"));
-
-
-            Toast.makeText(getBaseContext(),
-                    "Done reading SD 'mysdfile.txt'",
-                    Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(getBaseContext(), e.getMessage(),
-                    Toast.LENGTH_LONG).show();
+            finish();
         }
+
 
     }
 }

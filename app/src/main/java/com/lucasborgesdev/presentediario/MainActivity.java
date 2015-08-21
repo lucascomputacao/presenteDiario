@@ -15,7 +15,6 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -70,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Colocando ícone na ActionBar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher_presente_diario);
-        }
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher_presente_diario);
+//        }
 
 
         // Redirection button to text page
@@ -83,9 +82,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getBaseContext(), "Você escolheu ler o Texto na internet.", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getBaseContext(), "Será aberta uma página no seu navegador.", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getBaseContext(), "Você escolheu ler o Texto na internet.\nSerá aberta uma página no seu navegador.",
+                        Toast.LENGTH_SHORT).show();
                 Intent browserInternet = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(url_text_redirect));
                 startActivity(browserInternet);
@@ -99,8 +97,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getBaseContext(), "Você escolheu ouvir o Áudio na internet.", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getBaseContext(), "Será aberta uma página no seu navegador.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),
+                        "Você escolheu ouvir o Áudio na internet.\nSerá aberta uma página no seu navegador.",
+                        Toast.LENGTH_SHORT).show();
                 Intent audioBrowserInternet = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(url_audio_redirect));
                 startActivity(audioBrowserInternet);
@@ -110,14 +109,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Show Text button
         final Context context = this;
-        Button button_webactivity = (Button) findViewById(R.id.buttonUrl);
+        Button button_textViewActivity = (Button) findViewById(R.id.button_show_text);
 
-        button_webactivity.setOnClickListener(new View.OnClickListener() {
+        button_textViewActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Você escolheu mostrar o Texto.", Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getBaseContext(), "O Texto será exibido dentro do aplicativo (Não abre navegador).", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(context, WebActivity.class);
+                Toast.makeText(getBaseContext(), "O Texto será exibido dentro do aplicativo (Não abre navegador).",
+                        Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, TextViewActivity.class);
                 startActivity(intent);
             }
@@ -139,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.setAction(android.content.Intent.ACTION_VIEW);
                     intent.setDataAndType(uri_audio, "audio/*");
                     startActivity(intent);
-                }else{
+                } else {
                     Toast.makeText(getBaseContext(), "Áudio será baixado\nEspero o término do dowload e tente novamente",
                             Toast.LENGTH_SHORT).show();
                     // Download de Áudio
@@ -334,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Share at the same time
-        if (id == R.id.menu_item_share_sametime){
+        if (id == R.id.menu_item_share_sametime) {
             final Context context_sametime = this;
             Intent intent_sametime = new Intent(context_sametime, ShareSameTimeActivity.class);
             startActivity(intent_sametime);

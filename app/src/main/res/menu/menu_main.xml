@@ -11,25 +11,21 @@
             <item
                 android:id="@+id/menu_item_share_audio"
                 android:actionProviderClass="android.widget.ShareActionProvider"
-                android:icon="@drawable/ic_ic_share_audio_green_presente_diario"
                 android:title="@string/item_menu_share_text"
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/menu_item_share_text"
                 android:actionProviderClass="android.widget.ShareActionProvider"
-                android:icon="@drawable/ic_ic_share_text_green_presente_diario"
                 android:title="@string/texto_menu_share_audio"
                 app:showAsAction="ifRoom"/>
             <item
                 android:id="@+id/menu_item_share_both"
                 android:actionProviderClass="android.widget.ShareActionProvider"
-                android:icon="@drawable/ic_share_both_green_presente_diario"
                 android:title="@string/item_menu_share_both"
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/menu_item_share_sametime"
                 android:actionProviderClass="android.widget.ShareActionProvider"
-                android:icon="@drawable/ic_share_both_green_presente_diario"
                 android:title="@string/share_sametime"
                 app:showAsAction="ifRoom" />
         </menu>
