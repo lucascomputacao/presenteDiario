@@ -15,4 +15,5 @@
     <string name="select_option_text">Selecione uma das opções abaixo ou o menu compartilhar</string>
     <string name="credito">http://www.transmundial.org.br/</string>
     <string name="share_sametime">Enviar ambos para o mesmo App</string>
+    <string name="settings">Configurações</string>
 </resources>

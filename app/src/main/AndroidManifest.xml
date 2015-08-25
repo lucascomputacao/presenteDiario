@@ -17,6 +17,21 @@
         android:icon="@mipmap/ic_launcher_presente_diario"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+        <activity android:name=".QuickPrefsActivity" android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PreferenceFilesActivity"/>
+        <activity android:name=".DownloadAudioActivity"/>
+        <activity android:name=".DownloadTextoActivity"/>
+        <activity android:name=".ShowSettingsActivity" >
+            <intent-filter>
+                <action android:name=".activities.ShowSettingsActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".TextViewActivity" />
         <activity
             android:name=".ShareSameTimeActivity">

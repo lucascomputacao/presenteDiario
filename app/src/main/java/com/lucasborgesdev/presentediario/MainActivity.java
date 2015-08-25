@@ -5,8 +5,10 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
@@ -161,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -191,43 +194,37 @@ public class MainActivity extends AppCompatActivity {
                         textToast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                         textToast.show();
 
+                        // Verificar preferências do usuário
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                        if (sharedPreferences.getBoolean("perform_save", false)){
+                            // Verificar escolhas
+                        }else{
+                            // limpar pasta
+                            PreferenceFilesActivity preFile = new PreferenceFilesActivity();
+                            preFile.cleanDirectory();
+                        }
+//                        SharedPreferences.Editor editor = sharedPreferences.edit();
+//                        editor.putInt(key, value);
+//                        editor.commit();
+
                         // Verificando existência do áudio
                         if (!file_audio.exists()) {
                             // Download de Áudio
-                            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
-                            request.setTitle(title_download_audio);
-                            String description = "Áudio Presente Diário " + dateFormatTraces;
-                            request.setDescription(description);
-                            // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
-                            //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-                            request.allowScanningByMediaScanner();
-                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                            request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
-                            // Download manager
-                            DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                            manager.enqueue(request);
+                            Intent intent = new Intent(getApplicationContext(), DownloadAudioActivity.class);
+                            startActivity(intent);
                         }
                         // Download do arquivo de Texto
                         // Verificando existência de texto
                         if (!file_texto.exists()) {
                             // Download texto
-                            DownloadManager.Request request_text = new DownloadManager.Request(Uri.parse(url_download_texto));
-                            request_text.setTitle(title_download_texto);
-                            String description_text = "Texto Presente Diário " + dateFormatTraces;
-                            request_text.setDescription(description_text);
-                            // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
-                            //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-                            request_text.allowScanningByMediaScanner();
-                            request_text.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                            request_text.setDestinationInExternalPublicDir("PresenteDiario", nameOfFileText);
-                            // Download manager
-                            DownloadManager manager_text = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                            manager_text.enqueue(request_text);
-
-                            Toast mytoast = Toast.makeText(getBaseContext(), "Escolha uma das opções ou clique no Menu Compartilhar.", Toast.LENGTH_LONG);
-                            mytoast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-                            mytoast.show();
+                            Intent intent = new Intent(getApplicationContext(), DownloadTextoActivity.class);
+                            startActivity(intent);
                         } //final existe texto
+
+                        Toast mytoast = Toast.makeText(getBaseContext(), "Escolha uma das opções ou clique no Menu Compartilhar.", Toast.LENGTH_LONG);
+                        mytoast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+                        mytoast.show();
                     } // final onclick
                 }); // final positiveButton
 
@@ -336,6 +333,16 @@ public class MainActivity extends AppCompatActivity {
             final Context context_sametime = this;
             Intent intent_sametime = new Intent(context_sametime, ShareSameTimeActivity.class);
             startActivity(intent_sametime);
+            return true;
+        }
+
+        // Configs
+        if (id == R.id.settings) {
+
+            final Context context_settings = this;
+            Intent intent_settings = new Intent(context_settings, QuickPrefsActivity.class);
+            startActivity(intent_settings);
+
             return true;
         }
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Salvar Arquivos"
+        android:key="save_category">
+
+        <CheckBoxPreference
+            android:key="perform_save"
+            android:summary="Salva Arquivos no Período de Tempo Escolhido"
+            android:title="Habilitar Salvamento de Arquivos"
+            android:defaultValue="false"
+            />
+
+        <ListPreference
+            android:key="save_interval"
+            android:title="Periodo de Manutençao de arquivos"
+            android:summary="Define how often updates will be performed"
+            android:defaultValue="0"
+            android:entries="@array/saveInterval"
+            android:entryValues="@array/saveIntervalValues"
+            android:dependency="perform_save"
+            />
+
+
+    </PreferenceCategory>
+
+    <!--<PreferenceCategory-->
+        <!--android:title="Second Category"-->
+        <!--android:key="second_category">-->
+
+        <!--<EditTextPreference-->
+            <!--android:key="welcome_message"-->
+            <!--android:title="Welcome Message"-->
+            <!--android:summary="Define the Welcome message to be shown"-->
+            <!--android:dialogTitle="Welcome Message"-->
+            <!--android:dialogMessage="Provide a message"-->
+            <!--android:defaultValue="Default welcome message" />-->
+
+    <!--</PreferenceCategory>-->
+
+    <PreferenceCategory
+        android:title="Show settings">
+        <PreferenceScreen
+            android:title="show settings"
+            android:summary="show settings">
+            <intent android:action=".activities.ShowSettingsActivity"/>
+        </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>

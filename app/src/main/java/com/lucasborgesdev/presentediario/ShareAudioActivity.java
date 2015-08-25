@@ -2,14 +2,9 @@ package com.lucasborgesdev.presentediario;
 
 
 import android.app.Activity;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.webkit.MimeTypeMap;
-import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import java.io.File;
@@ -24,21 +19,12 @@ public class ShareAudioActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
         Calendar cal = Calendar.getInstance();
         Date now = cal.getTime(); // set the current datetime in a Date-object
-        final String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
         String dateFormatNoTraces = sdfNoTrace.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
-        final String url_download_audio = "http://104.236.27.118/presente_diario/presente"
-                + dateFormatNoTraces + ".mp3";
-        final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
-                + MimeTypeMap.getFileExtensionFromUrl(url_download_audio);
-        final String nameOfFile = URLUtil.guessFileName(url_download_audio, null,
-                MimeTypeMap.getFileExtensionFromUrl(url_download_audio));
 
-
-        Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio.", Toast.LENGTH_SHORT    ).show();
+        Toast.makeText(getBaseContext(), "Você escolheu compartilhar Áudio.", Toast.LENGTH_SHORT ).show();
 
         try {
             // Verificando existência do áudio
@@ -53,27 +39,15 @@ public class ShareAudioActivity extends Activity {
             } else {
                 // Mensagem para usuário
                 Toast.makeText(getBaseContext(),
-                        "Arquivo de áudio será baixado.\nClique no botão compatilhar após o término do download!",
+                        "Arquivo de áudio será baixado.\nClique no Botão Compatilhar Após o Término do Download!",
                         Toast.LENGTH_LONG).show();
                 // Download de Áudio
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_audio));
-                request.setTitle(title_download_audio);
-                String description = "Áudio Presente Diário " + dateFormatTraces;
-                request.setDescription(description);
-                // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
-                //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir("/PresenteDiario", nameOfFile);
-                // Download manager
-                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                manager.enqueue(request);
-
-
-                // Finaliza View enquanto faz o download do arquivo
-                finish();
+                Intent intent = new Intent(getApplicationContext(), DownloadAudioActivity.class);
+                startActivity(intent);
             }
 
+            // Não mostrar tela em branco
+            finish();
 
         } catch (Exception e) {
             Toast.makeText(getBaseContext(), e.getMessage(),
@@ -82,9 +56,4 @@ public class ShareAudioActivity extends Activity {
         }
     }
 
-    protected void onPause() {
-        super.onPause();
-        // Resolvendo tela em branco após compartilhar
-        finish();
-    }
 }
