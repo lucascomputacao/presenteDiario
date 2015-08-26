@@ -1,7 +1,6 @@
 package com.lucasborgesdev.presentediario;
 
 import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,8 +13,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.MimeTypeMap;
-import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -43,21 +40,7 @@ public class MainActivity extends AppCompatActivity {
     final String url_text_redirect = "http://www.transmundial.org.br/presente-diario/" + dateFormatTraces;
     final String url_audio_redirect = "http://transmundial.org.br/podcast/presente_diario/" + versao
             + "/" + "presente" + dateFormatNoTraces + ".mp3";
-    // Strings para download de áudio
-    final String url_download_audio = "http://104.236.27.118/presente_diario/presente"
-            + dateFormatNoTraces + ".mp3";
-    final String title_download_audio = "Presente_Diário_" + dateFormatTraces + "."
-            + MimeTypeMap.getFileExtensionFromUrl(url_download_audio);
-    final String nameOfFile = URLUtil.guessFileName(url_download_audio, null,
-            MimeTypeMap.getFileExtensionFromUrl(url_download_audio));
-    // Strings para download de texto do servidor
-    final String url_download_texto = "http://104.236.27.118/presente_diario/presente"
-            + dateFormatTraces + ".txt";
-    final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
-            + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
 
-    String nameOfFileText = URLUtil.guessFileName(url_download_texto, null,
-            MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
 
     // Bloqueia dialog de download de arquivos
     protected void setDialogDownloadFalse() {
@@ -154,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
     @Override
     protected void onStart() {
@@ -355,4 +337,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

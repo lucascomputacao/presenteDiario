@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#041A37">
     <PreferenceCategory
         android:title="Salvar Arquivos"
         android:key="save_category">
@@ -13,8 +14,8 @@
 
         <ListPreference
             android:key="save_interval"
-            android:title="Periodo de Manutençao de arquivos"
-            android:summary="Define o período de tempo em que os arqiuvos serão mantidos na memória"
+            android:title="Período de Manutenção de Arquivos"
+            android:summary="Define o período de tempo em que os Arquivos serão mantidos na memória"
             android:defaultValue="0"
             android:entries="@array/saveInterval"
             android:entryValues="@array/saveIntervalValues"

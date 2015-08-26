@@ -1,12 +1,9 @@
 package com.lucasborgesdev.presentediario;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.widget.Toast;
 
 import java.io.File;
@@ -35,7 +32,9 @@ public class PreferenceFilesActivity extends Activity {
 
     }
 
-    // Deleta todos os arquivos do diretório
+    /**
+     * Deleta todos os arquivos do diretório
+     */
     public void cleanDirectory() {
         File file = new File("/sdcard/PresenteDiario");
         if (file.isDirectory()) {
@@ -91,6 +90,9 @@ public class PreferenceFilesActivity extends Activity {
         }
     }
 
+    /**
+     * Inicia Contador
+     */
     public void startCounter() {
 
         // Carrega preferencias do usuario

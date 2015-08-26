@@ -23,5 +23,8 @@
         <item name="background">@color/action_bar</item>
     </style>
 
+    <style name="PreferencesTheme">
+        <item name="android:background">#162cea</item>
+    </style>
 
 </resources>

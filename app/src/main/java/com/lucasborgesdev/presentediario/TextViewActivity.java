@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
 import android.widget.EditText;
@@ -31,23 +32,13 @@ public class TextViewActivity extends Activity {
         setContentView(R.layout.textview);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat sdfNoTrace = new SimpleDateFormat("ddMMyyyy");
         Calendar cal = Calendar.getInstance();
         Date now = cal.getTime(); // set the current datetime in a Date-object
         final String dateFormatTraces = sdf.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
-        final String url_download_texto = "http://104.236.27.118/presente_diario/presente"
-                + dateFormatTraces + ".txt";
-        final String dateFormatNoTraces = sdfNoTrace.format(now); // contains dd-MM-yyyy (e.g. 15-03-2015 for March 15, 2015)
 
-        final String title_download_texto = "Presente_Diário_" + dateFormatTraces + "."
-                + MimeTypeMap.getFileExtensionFromUrl(url_download_texto);
-        String nameOfFile = URLUtil.guessFileName(url_download_texto, null,
-                MimeTypeMap.getFileExtensionFromUrl(url_download_texto));
 
         TextView textView = (TextView) findViewById(R.id.textView);
         File file_texto = new File("/sdcard/PresenteDiario/presente" + dateFormatTraces + ".txt");
-        Uri uri_texto = Uri.fromFile(file_texto);
-
         // Baixa o arquivo se ele não existir
         if (file_texto.exists()) {
             try {
@@ -71,22 +62,13 @@ public class TextViewActivity extends Activity {
         } else {
             Toast.makeText(getApplicationContext(), "Arquivo de Texto sendo baixado.\nTente novamente após o download.",
                     Toast.LENGTH_LONG).show();
-            // Download de arquivo
-            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_download_texto));
-            request.setTitle(title_download_texto);
-            String description = "Texto Presente Diário " + dateFormatTraces;
-            request.setDescription(description);
-            // use a linha abaixo se quiser limitar o download por wifi / tem opção de dados tbm
-            //request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-            request.allowScanningByMediaScanner();
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            request.setDestinationInExternalPublicDir("PresenteDiario", nameOfFile);
-
-            DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-            manager.enqueue(request);
+            // Download texto
+            Intent intent = new Intent(getApplicationContext(), DownloadTextoActivity.class);
+            startActivity(intent);
 
             finish();
         }
+
 
 
     }
