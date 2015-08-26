@@ -189,16 +189,31 @@ public class MainActivity extends AppCompatActivity {
                         // Verificar preferências do usuário
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                        if (sharedPreferences.getBoolean("perform_save", false)){
+                        if (sharedPreferences.getBoolean("perform_save", false)) {
                             // Verificar escolhas
-                        }else{
+                            PreferenceFilesActivity pref = new PreferenceFilesActivity();
+                            switch (sharedPreferences.getString("save_interval", "-1")) {
+                                //salvar todos
+                                case "0":
+                                    // Nada a fazer
+                                    Toast.makeText(getApplicationContext(), "Sem Limpeza", Toast.LENGTH_LONG).show();
+                                    break;
+                                // últimos sete
+                                case "7":
+                                    pref.checkFirstDayOfWeek();
+                                    Toast.makeText(getApplicationContext(), "Limpeza Semanal", Toast.LENGTH_LONG).show();
+                                    break;
+                                // todos do mês corrente
+                                case "30":
+                                    pref.checkFirstDayOfMonth();
+                                    Toast.makeText(getApplicationContext(), "Limpeza Mensal", Toast.LENGTH_LONG).show();
+                                    break;
+                            }
+                        } else {
                             // limpar pasta
                             PreferenceFilesActivity preFile = new PreferenceFilesActivity();
                             preFile.cleanDirectory();
                         }
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        editor.putInt(key, value);
-//                        editor.commit();
 
                         // Verificando existência do áudio
                         if (!file_audio.exists()) {

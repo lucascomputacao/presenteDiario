@@ -16,16 +16,14 @@ public class ShowSettingsActivity extends Activity {
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-//        StringBuilder builder = new StringBuilder();
-        String builder = new String();
+        String settings;
 
-        builder = sharedPrefs.getBoolean("perform_save", false) + sharedPrefs.getString("save_interval", "-1");
-//        builder.append("\n" + sharedPrefs.getBoolean("perform_save", false));
-//        builder.append("\n" + sharedPrefs.getString("save_interval", "-1"));
-//        builder.append("\n" + sharedPrefs.getString("welcome_message", "NULL"));
+        settings = sharedPrefs.getBoolean("perform_save", false) + "\n" +
+                sharedPrefs.getString("save_interval", "-1") + "\n" +
+                sharedPrefs.getInt("count_save",0);
 
         TextView settingsTextView = (TextView) findViewById(R.id.settings_text_view);
-        settingsTextView.setText(builder.toString());
+        settingsTextView.setText(settings);
 
     }
 

@@ -2,8 +2,8 @@
 <resources>
     <string-array name="saveInterval">
         <item name="0">Todos - Mantém todos os Arquivos</item>
-        <item name="7">Todos da Semana - Mantém os Últimos 7 dias</item>
-        <item name="30">Todo do Mês - Mantém Apenas do Mês Atual</item>
+        <item name="7">Semana - Mantém os Arquivos da Semana Atual</item>
+        <item name="30">Mês - Mantém os Arquivos do Mês Atual</item>
     </string-array>
     <string-array name="saveIntervalValues">
         <item name="0">0</item>

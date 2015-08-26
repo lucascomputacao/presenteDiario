@@ -14,7 +14,7 @@
         <ListPreference
             android:key="save_interval"
             android:title="Periodo de Manutençao de arquivos"
-            android:summary="Define how often updates will be performed"
+            android:summary="Define o período de tempo em que os arqiuvos serão mantidos na memória"
             android:defaultValue="0"
             android:entries="@array/saveInterval"
             android:entryValues="@array/saveIntervalValues"
@@ -38,12 +38,12 @@
 
     <!--</PreferenceCategory>-->
 
-    <PreferenceCategory
-        android:title="Show settings">
-        <PreferenceScreen
-            android:title="show settings"
-            android:summary="show settings">
-            <intent android:action=".activities.ShowSettingsActivity"/>
-        </PreferenceScreen>
-    </PreferenceCategory>
+    <!--<PreferenceCategory-->
+        <!--android:title="Show settings">-->
+        <!--<PreferenceScreen-->
+            <!--android:title="show settings"-->
+            <!--android:summary="show settings">-->
+            <!--<intent android:action=".activities.ShowSettingsActivity"/>-->
+        <!--</PreferenceScreen>-->
+    <!--</PreferenceCategory>-->
 </PreferenceScreen>
