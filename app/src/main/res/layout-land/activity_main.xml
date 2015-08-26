@@ -127,7 +127,8 @@
                 android:layout_marginTop="20dp"
 
                 android:text="@string/titulo"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"
+                android:textColor="@color/cinza_label" />
 
             <TextView
                 android:id="@+id/credito"
@@ -136,7 +137,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:text="@string/credito"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"
+                android:textColor="@color/cinza_label"/>
         </LinearLayout>
 
 

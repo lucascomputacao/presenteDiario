@@ -4,5 +4,6 @@
     <color name="azul_escuro_actionbar">#040054</color>
     <color name="cinza_bg_presente">#808080</color>
     <color name="black">#000000</color>
+    <color name="cinza_label">#BDBDBD</color>
 
 </resources>
