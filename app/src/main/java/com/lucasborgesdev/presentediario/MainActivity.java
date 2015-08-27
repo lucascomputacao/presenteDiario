@@ -178,17 +178,17 @@ public class MainActivity extends AppCompatActivity {
                                 //salvar todos
                                 case "0":
                                     // Nada a fazer
-                                    Toast.makeText(getApplicationContext(), "Sem Limpeza", Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(getApplicationContext(), "Sem Limpeza", Toast.LENGTH_LONG).show();
                                     break;
                                 // últimos sete
                                 case "7":
                                     pref.checkFirstDayOfWeek();
-                                    Toast.makeText(getApplicationContext(), "Limpeza Semanal", Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(getApplicationContext(), "Limpeza Semanal", Toast.LENGTH_LONG).show();
                                     break;
                                 // todos do mês corrente
                                 case "30":
                                     pref.checkFirstDayOfMonth();
-                                    Toast.makeText(getApplicationContext(), "Limpeza Mensal", Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(getApplicationContext(), "Limpeza Mensal", Toast.LENGTH_LONG).show();
                                     break;
                             }
                         } else {
