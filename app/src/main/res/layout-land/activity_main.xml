@@ -10,17 +10,17 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
+        android:gravity="center"
         android:orientation="vertical"
-        tools:context=".MainActivity"
-        android:weightSum="1">
+        android:weightSum="1"
+        tools:context=".MainActivity">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
 
+            android:orientation="horizontal">
 
 
             <LinearLayout
@@ -30,15 +30,16 @@
 
                 <Button
                     android:id="@+id/button_show_text"
-                    android:layout_width="135dp"
-                    android:layout_height="150dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:background="@drawable/bloco_texto_button" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/ler"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -49,66 +50,61 @@
 
                 <Button
                     android:id="@+id/audio"
-                    android:layout_width="135dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:background="@drawable/bloco_audio_button" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/ouvir"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/texto"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/bloco_texto_internet_button" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <Button
-                        android:id="@+id/texto"
-                        android:layout_width="135dp"
-                        android:layout_height="150dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:background="@drawable/bloco_texto_internet_button" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/ler_internet"
-                        android:textStyle="bold"/>
+                    android:layout_gravity="center"
+                    android:text="@string/ler_internet"
+                    android:textStyle="bold" />
 
-                </LinearLayout>
-                <LinearLayout
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/audio_internet"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/bloco_audio_internet_button" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center"
+                    android:text="@string/ouvir_internet"
+                    android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/audio_internet"
-                        android:layout_width="135dp"
-                        android:layout_height="150dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:background="@drawable/bloco_audio_internet_button" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/ouvir_internet"
-                        android:textStyle="bold"/>
-
-                </LinearLayout>
-
-
-
+            </LinearLayout>
 
 
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -116,7 +112,6 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/activity_vertical_margin"
             android:orientation="vertical">
-
 
 
             <TextView
@@ -127,8 +122,8 @@
                 android:layout_marginTop="20dp"
 
                 android:text="@string/titulo"
-                android:textStyle="bold|italic"
-                android:textColor="@color/cinza_label" />
+                android:textColor="@color/cinza_label"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/credito"
@@ -137,8 +132,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:text="@string/credito"
-                android:textStyle="bold|italic"
-                android:textColor="@color/cinza_label"/>
+                android:textColor="@color/cinza_label"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
 

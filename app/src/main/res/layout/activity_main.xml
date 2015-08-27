@@ -10,31 +10,29 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:context=".MainActivity"
+        android:gravity="center"
         android:weightSum="1">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_horizontal_margin"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="2dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+
+                    android:gravity="center_vertical">
                     <Button
                         android:id="@+id/button_show_text"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:background="@drawable/bloco_texto_button" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -42,20 +40,18 @@
                         android:layout_gravity="center"
                         android:text="@string/ler"
                         android:textStyle="bold"/>
-
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp">
                     <Button
                         android:id="@+id/audio"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:background="@drawable/bloco_audio_button" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -66,8 +62,6 @@
 
                 </LinearLayout>
 
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -92,8 +86,8 @@
 
                     <Button
                         android:id="@+id/texto"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:background="@drawable/bloco_texto_internet_button" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -108,14 +102,15 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp">
 
                     <Button
                         android:id="@+id/audio_internet"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:background="@drawable/bloco_audio_internet_button" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -132,19 +127,20 @@
             </LinearLayout>
 
 
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="150dp">
             <TextView
                 android:id="@+id/titulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="60dp"
+                android:gravity="bottom"
                 android:text="@string/titulo"
                 android:textStyle="bold|italic"
                 android:textColor="@color/cinza_label" />
@@ -162,4 +158,5 @@
 
 
     </LinearLayout>
+
 </ScrollView>
