@@ -253,9 +253,10 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             final String url_site = "http://www.transmundial.org.br/";
-            String dialog_title = "Presente Diário - Versão 0.1 "
+            String dialog_title = "Presente Diário - Versão 1.0 "
                     + "\n"
-                    + "web site: lucasborgesdev.com";
+                    + "web sites: lucasborgesdev.com - Codificação"
+                    + "           gabrilima.com - Design";
             String dialog_message = "Este aplicativo redireciona/baixa o contéudo do Presente Diário."
                     + "\n" + "Disponível em :" + "\n"
                     + "http://www.transmundial.org.br/";

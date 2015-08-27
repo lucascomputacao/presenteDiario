@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="action_bar">#004D40</color>
+    <color name="action_bar">#009688</color>
     <color name="azul_escuro_actionbar">#040054</color>
     <color name="cinza_bg_presente">#808080</color>
     <color name="black">#000000</color>
